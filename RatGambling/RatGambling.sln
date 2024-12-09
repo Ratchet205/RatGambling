@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatGambling.Core", "RatGambling.Core\RatGambling.Core.csproj", "{7075F16D-E789-4478-A480-7D2E0C4E500D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{F66461C6-5A55-4B18-9536-AE989C9B9529}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{7F60B832-4046-4BBA-A6AC-1CB55FD083FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatGambling.Desktop", "RatGambling.Desktop\RatGambling.Desktop.csproj", "{3579265C-49A3-4C1B-A1AF-F8D568DC926E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{DB23F25A-379D-4F61-91AB-0E9372D4855B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatGambling.Server", "RatGambling.Server\RatGambling.Server.csproj", "{589A40D0-F901-4F4B-AF98-437EE30CAB7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7075F16D-E789-4478-A480-7D2E0C4E500D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7075F16D-E789-4478-A480-7D2E0C4E500D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7075F16D-E789-4478-A480-7D2E0C4E500D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7075F16D-E789-4478-A480-7D2E0C4E500D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3579265C-49A3-4C1B-A1AF-F8D568DC926E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3579265C-49A3-4C1B-A1AF-F8D568DC926E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3579265C-49A3-4C1B-A1AF-F8D568DC926E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3579265C-49A3-4C1B-A1AF-F8D568DC926E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{589A40D0-F901-4F4B-AF98-437EE30CAB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{589A40D0-F901-4F4B-AF98-437EE30CAB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{589A40D0-F901-4F4B-AF98-437EE30CAB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{589A40D0-F901-4F4B-AF98-437EE30CAB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3579265C-49A3-4C1B-A1AF-F8D568DC926E} = {F66461C6-5A55-4B18-9536-AE989C9B9529}
+		{DB23F25A-379D-4F61-91AB-0E9372D4855B} = {F66461C6-5A55-4B18-9536-AE989C9B9529}
+		{589A40D0-F901-4F4B-AF98-437EE30CAB7E} = {7F60B832-4046-4BBA-A6AC-1CB55FD083FB}
+	EndGlobalSection
+EndGlobal

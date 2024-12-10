@@ -12,8 +12,8 @@ namespace RatGambling.Desktop.src
 {
     public partial class StdForm : Form
     {
-        private bool pBExitHover = false;
-        private bool pBMinHover = false;
+        private bool _pBExitHover = false;
+        private bool _pBMinHover = false;
         public StdForm()
         {
             InitializeComponent();
@@ -37,7 +37,7 @@ namespace RatGambling.Desktop.src
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                pb.BackColor = pBExitHover ? Color.FromArgb(0xBE, 0, 0) : pTopBorder.BackColor;
+                pb.BackColor = _pBExitHover ? Color.FromArgb(0xBE, 0, 0) : pTopBorder.BackColor;
 
 
                 using Pen pen = new(Color.FromArgb(0xbe, 0xbe, 0xbe), 1.6f)
@@ -54,14 +54,14 @@ namespace RatGambling.Desktop.src
         private void pBExit_MouseEnter(object sender, EventArgs e)
         {
             PictureBox? pictureBox = sender as PictureBox;
-            pBExitHover = true;
+            _pBExitHover = true;
             pictureBox?.Invalidate();
         }
 
         private void pBExit_MouseLeave(object sender, EventArgs e)
         {
             PictureBox? pictureBox = sender as PictureBox;
-            pBExitHover = false;
+            _pBExitHover = false;
             pictureBox?.Invalidate();
         }
 
@@ -80,7 +80,7 @@ namespace RatGambling.Desktop.src
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                pb.BackColor = pBMinHover ? Color.FromArgb(0xEF2056) : pTopBorder.BackColor;
+                pb.BackColor = _pBMinHover ? Color.FromArgb(0xEF, 0x20, 0x56) : Color.FromArgb(0xE4, 0x15, 0x4B);
 
 
                 using Pen pen = new(Color.FromArgb(0xbe, 0xbe, 0xbe), 1.6f)
@@ -96,20 +96,20 @@ namespace RatGambling.Desktop.src
         private void pBMin_MouseLeave(object sender, EventArgs e)
         {
             PictureBox? pictureBox = sender as PictureBox;
-            pBMinHover = false;
+            _pBMinHover = false;
             pictureBox?.Invalidate();
         }
 
         private void pBMin_MouseEnter(object sender, EventArgs e)
         {
             PictureBox? pictureBox = sender as PictureBox;
-            pBMinHover = true;
+            _pBMinHover = true;
             pictureBox?.Invalidate();
         }
 
         private void pBMin_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

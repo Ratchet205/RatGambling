@@ -1,3 +1,5 @@
+using RatGambling.Desktop.src;
+
 namespace RatGambling.Desktop
 {
     internal static class Program

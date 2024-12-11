@@ -1,4 +1,6 @@
-﻿namespace RatGambling.Desktop.startingPage
+﻿using System.Drawing.Drawing2D;
+
+namespace RatGambling.Desktop.startingPage
 {
     partial class MainForm
     {
@@ -28,35 +30,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            button1 = new Button();
+            pBPlayButton = new PictureBox();
+            pBQuit = new PictureBox();
+            pQuitButton = new Panel();
+            ((System.ComponentModel.ISupportInitialize)pBPlayButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pBQuit).BeginInit();
+            pQuitButton.SuspendLayout();
             SuspendLayout();
             // 
-            // button1
+            // pBPlayButton
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.Location = new Point(537, 326);
-            button1.Name = "button1";
-            button1.Size = new Size(239, 117);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            pBPlayButton.BackgroundImage = Properties.Resources.play_button_unpressed;
+            pBPlayButton.BackgroundImageLayout = ImageLayout.Stretch;
+            pBPlayButton.ErrorImage = null;
+            pBPlayButton.Location = new Point(710, 410);
+            pBPlayButton.Name = "pBPlayButton";
+            pBPlayButton.Size = new Size(200, 200);
+            pBPlayButton.TabIndex = 1;
+            pBPlayButton.TabStop = false;
+            pBPlayButton.Click += pictureBox1_Click;
+            pBPlayButton.MouseDown += pictureBox1_MouseDown;
+            pBPlayButton.MouseEnter += pictureBox1_MouseEnter;
+            pBPlayButton.MouseLeave += pictureBox1_MouseLeave;
+            pBPlayButton.MouseUp += pictureBox1_MouseUp;
+            // 
+            // pBQuit
+            // 
+            pBQuit.BackgroundImageLayout = ImageLayout.Stretch;
+            pBQuit.Image = Properties.Resources.quit_rat_walking;
+            pBQuit.Location = new Point(303, 0);
+            pBQuit.Name = "pBQuit";
+            pBQuit.Size = new Size(100, 106);
+            pBQuit.SizeMode = PictureBoxSizeMode.StretchImage;
+            pBQuit.TabIndex = 2;
+            pBQuit.TabStop = false;
+            pBQuit.Click += pQuitButton_Click;
+            // 
+            // pQuitButton
+            // 
+            pQuitButton.Controls.Add(pBQuit);
+            pQuitButton.Location = new Point(12, 898);
+            pQuitButton.Name = "pQuitButton";
+            pQuitButton.Size = new Size(403, 106);
+            pQuitButton.TabIndex = 3;
+            pQuitButton.Click += pQuitButton_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1620, 1020);
-            Controls.Add(button1);
+            Controls.Add(pQuitButton);
+            Controls.Add(pBPlayButton);
             Name = "MainForm";
             Text = "MainForm";
-            Controls.SetChildIndex(button1, 0);
+            TransparencyKey = Color.FromArgb(64, 64, 64);
+            Controls.SetChildIndex(pBPlayButton, 0);
+            Controls.SetChildIndex(pQuitButton, 0);
+            ((System.ComponentModel.ISupportInitialize)pBPlayButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pBQuit).EndInit();
+            pQuitButton.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button button1;
+        private PictureBox pBPlayButton;
+        private PictureBox pBQuit;
+        private Panel pQuitButton;
     }
 }

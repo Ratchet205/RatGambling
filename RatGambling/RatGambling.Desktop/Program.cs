@@ -1,4 +1,5 @@
 using RatGambling.Desktop.src;
+using RatGambling.Desktop.startingPage;
 
 namespace RatGambling.Desktop
 {
@@ -13,7 +14,7 @@ namespace RatGambling.Desktop
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new StdForm());
+            Application.Run(new MainForm());
         }
     }
 }

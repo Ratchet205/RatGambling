@@ -31,7 +31,6 @@
             pTopBorder = new Panel();
             pBMin = new PictureBox();
             pBExit = new PictureBox();
-            button1 = new Button();
             pTopBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pBMin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pBExit).BeginInit();
@@ -78,23 +77,12 @@
             pBExit.MouseEnter += pBExit_MouseEnter;
             pBExit.MouseLeave += pBExit_MouseLeave;
             // 
-            // button1
-            // 
-            button1.Location = new Point(440, 274);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // StdForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1620, 1020);
-            Controls.Add(button1);
             Controls.Add(pTopBorder);
             FormBorderStyle = FormBorderStyle.None;
             Name = "StdForm";
@@ -111,6 +99,5 @@
         private Panel pTopBorder;
         private PictureBox pBMin;
         private PictureBox pBExit;
-        private Button button1;
     }
 }

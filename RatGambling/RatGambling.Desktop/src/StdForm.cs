@@ -19,7 +19,6 @@ namespace RatGambling.Desktop.src
         public StdForm()
         {
             InitializeComponent();
-            IsMdiContainer = true;
         }
 
         private void pBExit_Click(object sender, EventArgs e)

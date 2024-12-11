@@ -12,4 +12,10 @@
     <ProjectReference Include="..\RatGambling.Core\RatGambling.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="src\resources\lang\" />
+    <Folder Include="src\resources\sounds\" />
+    <Folder Include="src\resources\textures\" />
+  </ItemGroup>
+
 </Project>

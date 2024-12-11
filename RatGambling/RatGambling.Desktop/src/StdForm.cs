@@ -12,12 +12,16 @@ namespace RatGambling.Desktop.src
 {
     public partial class StdForm : Form
     {
+        private static bool _dragging = false;
         private bool _pBExitHover = false;
         private bool _pBMinHover = false;
+        private (int X, int Y) _mouseposition;
         public StdForm()
         {
             InitializeComponent();
+            IsMdiContainer = true;
         }
+
         private void pBExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -110,6 +114,38 @@ namespace RatGambling.Desktop.src
         private void pBMin_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void pTopBorder_MouseDown(object sender, MouseEventArgs e)
+        {
+            _dragging = true;
+            _mouseposition.X = e.X;
+            _mouseposition.Y = e.Y;
+        }
+
+        private void pTopBorder_MouseUp(object sender, MouseEventArgs e)
+        {
+            _dragging = false;
+        }
+
+        private void pTopBorder_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_dragging)
+            {
+                SetDesktopLocation(MousePosition.X - _mouseposition.X, MousePosition.Y - _mouseposition.Y);
+            }
+        }
+
+        private void pTopBorder_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            CenterToScreen();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StdForm newf = new();
+            newf.MdiParent = this;
+            newf.Show();
         }
     }
 }

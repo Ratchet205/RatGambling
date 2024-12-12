@@ -49,9 +49,9 @@ namespace RatGambling.Desktop.startingPage
             //PlayButton 2/3
             //
             #region PlayButton
-            unpressedImage = Properties.Resources.play_button_unpressed;
+            unpressedImage = Properties.MainFormResources.play_button_unpressed;
             hoverImage = ApplyHoverEffect(unpressedImage);
-            pressedImage = ApplyPressedEffect(Properties.Resources.play_button_pressed);
+            pressedImage = ApplyPressedEffect(Properties.MainFormResources.play_button_pressed);
             #endregion
             //
             //QuitButton 2/3

@@ -44,7 +44,7 @@ namespace RatGambling.Desktop.startingPage
             // 
             // pBPlayButton
             // 
-            pBPlayButton.BackgroundImage = Properties.Resources.play_button_unpressed;
+            pBPlayButton.BackgroundImage = Properties.MainFormResources.play_button_unpressed;
             pBPlayButton.BackgroundImageLayout = ImageLayout.Stretch;
             pBPlayButton.ErrorImage = null;
             pBPlayButton.Location = new Point(710, 410);
@@ -61,7 +61,7 @@ namespace RatGambling.Desktop.startingPage
             // pBRatStanding
             // 
             pBRatStanding.BackgroundImageLayout = ImageLayout.Stretch;
-            pBRatStanding.Image = Properties.Resources.rat_standing;
+            pBRatStanding.Image = Properties.MainFormResources.rat_standing;
             pBRatStanding.Location = new Point(571, 104);
             pBRatStanding.Name = "pBRatStanding";
             pBRatStanding.Size = new Size(117, 141);
@@ -73,7 +73,7 @@ namespace RatGambling.Desktop.startingPage
             // pBRatMoving
             // 
             pBRatMoving.BackgroundImageLayout = ImageLayout.Stretch;
-            pBRatMoving.Image = Properties.Resources.rat_walking;
+            pBRatMoving.Image = Properties.MainFormResources.rat_walking;
             pBRatMoving.Location = new Point(571, 104);
             pBRatMoving.Name = "pBRatMoving";
             pBRatMoving.Size = new Size(117, 141);
@@ -85,7 +85,7 @@ namespace RatGambling.Desktop.startingPage
             // 
             // pBHeadLine
             // 
-            pBHeadLine.Image = Properties.Resources.heading;
+            pBHeadLine.Image = Properties.MainFormResources.heading;
             pBHeadLine.Location = new Point(107, 38);
             pBHeadLine.Name = "pBHeadLine";
             pBHeadLine.Size = new Size(1285, 366);
@@ -94,7 +94,7 @@ namespace RatGambling.Desktop.startingPage
             // 
             // pBQuitButton
             // 
-            pBQuitButton.Image = Properties.Resources.rat_of_spades_QUIT;
+            pBQuitButton.Image = Properties.MainFormResources.rat_of_spades_QUIT;
             pBQuitButton.Location = new Point(12, 755);
             pBQuitButton.Name = "pBQuitButton";
             pBQuitButton.Size = new Size(180, 253);

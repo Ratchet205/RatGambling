@@ -473,6 +473,16 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap heading {
+            get {
+                object obj = ResourceManager.GetObject("heading", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap jack_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("jack_of_clubs", resourceCulture);
@@ -613,9 +623,29 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap quit_rat_walking {
+        internal static System.Drawing.Bitmap quit {
             get {
-                object obj = ResourceManager.GetObject("quit_rat_walking", resourceCulture);
+                object obj = ResourceManager.GetObject("quit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rat_standing {
+            get {
+                object obj = ResourceManager.GetObject("rat_standing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rat_walking {
+            get {
+                object obj = ResourceManager.GetObject("rat_walking", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

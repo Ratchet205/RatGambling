@@ -633,6 +633,16 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap rat_of_spades_QUIT {
+            get {
+                object obj = ResourceManager.GetObject("rat_of_spades_QUIT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap rat_standing {
             get {
                 object obj = ResourceManager.GetObject("rat_standing", resourceCulture);

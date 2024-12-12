@@ -32,16 +32,14 @@ namespace RatGambling.Desktop.startingPage
         {
             pBPlayButton = new PictureBox();
             pBRatStanding = new PictureBox();
-            pQuitButton = new Panel();
-            pictureBox1 = new PictureBox();
             pBRatMoving = new PictureBox();
-            pictureBox2 = new PictureBox();
+            pBHeadLine = new PictureBox();
+            pBQuitButton = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pBPlayButton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pBRatStanding).BeginInit();
-            pQuitButton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pBRatMoving).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pBHeadLine).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pBQuitButton).BeginInit();
             SuspendLayout();
             // 
             // pBPlayButton
@@ -54,11 +52,11 @@ namespace RatGambling.Desktop.startingPage
             pBPlayButton.Size = new Size(200, 200);
             pBPlayButton.TabIndex = 1;
             pBPlayButton.TabStop = false;
-            pBPlayButton.Click += pictureBox1_Click;
-            pBPlayButton.MouseDown += pictureBox1_MouseDown;
-            pBPlayButton.MouseEnter += pictureBox1_MouseEnter;
-            pBPlayButton.MouseLeave += pictureBox1_MouseLeave;
-            pBPlayButton.MouseUp += pictureBox1_MouseUp;
+            pBPlayButton.Click += pBPlayButton_Click;
+            pBPlayButton.MouseDown += pBPlayButton_MouseDown;
+            pBPlayButton.MouseEnter += pBPlayButton_MouseEnter;
+            pBPlayButton.MouseLeave += pBPlayButton_MouseLeave;
+            pBPlayButton.MouseUp += pBPlayButton_MouseUp;
             // 
             // pBRatStanding
             // 
@@ -71,25 +69,6 @@ namespace RatGambling.Desktop.startingPage
             pBRatStanding.TabIndex = 2;
             pBRatStanding.TabStop = false;
             pBRatStanding.Click += pBRatStanding_Click;
-            // 
-            // pQuitButton
-            // 
-            pQuitButton.Controls.Add(pictureBox1);
-            pQuitButton.Location = new Point(12, 898);
-            pQuitButton.Name = "pQuitButton";
-            pQuitButton.Size = new Size(403, 106);
-            pQuitButton.TabIndex = 3;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = Properties.Resources.quit;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(284, 106);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
             // 
             // pBRatMoving
             // 
@@ -104,38 +83,52 @@ namespace RatGambling.Desktop.startingPage
             pBRatMoving.Visible = false;
             pBRatMoving.Click += pBRatMoving_Click;
             // 
-            // pictureBox2
+            // pBHeadLine
             // 
-            pictureBox2.Image = Properties.Resources.heading;
-            pictureBox2.Location = new Point(107, 38);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1285, 366);
-            pictureBox2.TabIndex = 6;
-            pictureBox2.TabStop = false;
+            pBHeadLine.Image = Properties.Resources.heading;
+            pBHeadLine.Location = new Point(107, 38);
+            pBHeadLine.Name = "pBHeadLine";
+            pBHeadLine.Size = new Size(1285, 366);
+            pBHeadLine.TabIndex = 6;
+            pBHeadLine.TabStop = false;
+            // 
+            // pBQuitButton
+            // 
+            pBQuitButton.Image = Properties.Resources.rat_of_spades_QUIT;
+            pBQuitButton.Location = new Point(12, 755);
+            pBQuitButton.Name = "pBQuitButton";
+            pBQuitButton.Size = new Size(180, 253);
+            pBQuitButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            pBQuitButton.TabIndex = 7;
+            pBQuitButton.TabStop = false;
+            pBQuitButton.Click += pBQuitButton_Click;
+            pBQuitButton.MouseDown += pBQuitButton_MouseDown;
+            pBQuitButton.MouseEnter += pBQuitButton_MouseEnter;
+            pBQuitButton.MouseLeave += pBQuitButton_MouseLeave;
+            pBQuitButton.MouseUp += pBQuitButton_MouseUp;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(1620, 1020);
+            Controls.Add(pBQuitButton);
             Controls.Add(pBRatMoving);
             Controls.Add(pBRatStanding);
-            Controls.Add(pQuitButton);
             Controls.Add(pBPlayButton);
-            Controls.Add(pictureBox2);
+            Controls.Add(pBHeadLine);
             Name = "MainForm";
             Text = "";
-            Controls.SetChildIndex(pictureBox2, 0);
+            Controls.SetChildIndex(pBHeadLine, 0);
             Controls.SetChildIndex(pBPlayButton, 0);
-            Controls.SetChildIndex(pQuitButton, 0);
             Controls.SetChildIndex(pBRatStanding, 0);
             Controls.SetChildIndex(pBRatMoving, 0);
+            Controls.SetChildIndex(pBQuitButton, 0);
             ((System.ComponentModel.ISupportInitialize)pBPlayButton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pBRatStanding).EndInit();
-            pQuitButton.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pBRatMoving).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pBHeadLine).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pBQuitButton).EndInit();
             ResumeLayout(false);
         }
 
@@ -143,9 +136,8 @@ namespace RatGambling.Desktop.startingPage
 
         private PictureBox pBPlayButton;
         private PictureBox pBRatStanding;
-        private Panel pQuitButton;
         private PictureBox pBRatMoving;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private PictureBox pBHeadLine;
+        private PictureBox pBQuitButton;
     }
 }

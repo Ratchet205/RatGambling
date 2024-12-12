@@ -139,12 +139,5 @@ namespace RatGambling.Desktop.src
         {
             CenterToScreen();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            StdForm newf = new();
-            newf.MdiParent = this;
-            newf.Show();
-        }
     }
 }

@@ -21,6 +21,7 @@ namespace RatGambling.Desktop.startingPage
         private Image hoverImage;
         private Image pressedImage;
         //private Point originalLocation;
+
         public MainForm()
         {
             InitializeComponent();
@@ -29,8 +30,9 @@ namespace RatGambling.Desktop.startingPage
             hoverImage = ApplyHoverEffect(unpressedImage);
             pressedImage = ApplyPressedEffect(Properties.Resources.play_button_pressed);
 
-            //originalLocation = pictureBox1.Location;
+
         }
+        #region PlayButton
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -109,11 +111,21 @@ namespace RatGambling.Desktop.startingPage
 
             return pressedImage;
         }
+        #endregion
 
-        private void pQuitButton_Click(object sender, EventArgs e)
+        #region RatSecret
+        private void pBRatMoving_Click(object sender, EventArgs e)
         {
-
+            pBRatStanding.Visible = !pBRatStanding.Visible;
+            pBRatMoving.Visible = !pBRatMoving.Visible;
         }
+
+        private void pBRatStanding_Click(object sender, EventArgs e)
+        {
+            pBRatStanding.Visible = !pBRatStanding.Visible;
+            pBRatMoving.Visible = !pBRatMoving.Visible;
+        }
+        #endregion
     }
 }
 #pragma warning restore

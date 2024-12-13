@@ -83,6 +83,26 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap buttonLeer {
+            get {
+                object obj = ResourceManager.GetObject("buttonLeer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GameLogo {
+            get {
+                object obj = ResourceManager.GetObject("GameLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap heading {
             get {
                 object obj = ResourceManager.GetObject("heading", resourceCulture);
@@ -176,6 +196,26 @@ namespace RatGambling.Desktop.Properties {
         internal static System.Drawing.Bitmap red_joker {
             get {
                 object obj = ResourceManager.GetObject("red_joker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap standartUser {
+            get {
+                object obj = ResourceManager.GetObject("standartUser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap submit_button {
+            get {
+                object obj = ResourceManager.GetObject("submit_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

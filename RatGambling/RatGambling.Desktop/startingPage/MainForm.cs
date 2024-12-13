@@ -1,5 +1,4 @@
-﻿#pragma warning disable
-using RatGambling.Desktop.Properties;
+﻿using RatGambling.Desktop.Properties;
 using RatGambling.Desktop.src;
 using System;
 using System.Collections.Generic;
@@ -41,6 +40,15 @@ namespace RatGambling.Desktop.startingPage
         //Down-Event
         private Image originalImage;
         #endregion
+        //
+        //ProfileMenuButton 1/3
+        //
+        #region ProfileMenuButton
+        bool isLoggedin = false;
+        public DarkenPanel glassPanel = new();
+
+
+        #endregion
 
         public MainForm()
         {
@@ -66,8 +74,14 @@ namespace RatGambling.Desktop.startingPage
             //Down-Event
             originalImage = pBQuitButton.Image;
             #endregion
+            //
+            //ProfileMenuButton 2/3
+            //
+            #region ProfileMenuButton
 
 
+
+            #endregion
         }
         //
         //PlayButton 3/3
@@ -188,7 +202,7 @@ namespace RatGambling.Desktop.startingPage
             pBQuitButton.Location = originalLocation;
         }
 
-        private void ShakeTimer_Tick(object sender, EventArgs e)
+        private void ShakeTimer_Tick(object? sender, EventArgs e)
         {
             int xOffset = random.Next(-shakeDistance, shakeDistance + 1);
             int yOffset = random.Next(-shakeDistance, shakeDistance + 1);
@@ -214,7 +228,7 @@ namespace RatGambling.Desktop.startingPage
             }
         }
 
-        private Image ConvertToGrayscale(Image originalImage)
+        private Image? ConvertToGrayscale(Image originalImage)
         {
             if (originalImage == null)
             {
@@ -244,6 +258,39 @@ namespace RatGambling.Desktop.startingPage
             return grayscaleBitmap;
         }
         #endregion
+
+        //
+        //ProfileMenuButton 3/3
+        //
+        #region ProfileMenuButton
+        private void pBAccount_Click(object sender, EventArgs e)
+        {
+            glassPanel = new DarkenPanel
+            {
+                Dock = DockStyle.Fill,
+                Opacity = 0.7f,
+                BackColor = Color.FromArgb(34, 10, 10)
+            };
+
+            Controls.Add(glassPanel);
+            glassPanel.BringToFront();
+            
+            Invalidate();
+
+            if (isLoggedin)
+            {
+                AccountForm accountForm = new AccountForm();
+                accountForm.Show();
+            }
+            else
+            {
+                LoginForm log_RegForm = new LoginForm(this);
+                log_RegForm.Show();
+            }
+
+        }
+
+
+        #endregion
     }
 }
-#pragma warning restore

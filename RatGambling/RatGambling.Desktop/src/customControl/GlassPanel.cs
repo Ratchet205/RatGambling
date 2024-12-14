@@ -1,24 +1,28 @@
 ﻿using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class DarkenPanel : Control
+namespace RatGambling.Desktop.src.customControl
 {
-    public float Opacity { get; set; } = 1.0f; // Value between 0 (transparent) and 1 (opaque)
-
-    protected override void OnPaint(PaintEventArgs e)
+    public class DarkenPanel : Control
     {
-        base.OnPaint(e);
+        public float Opacity { get; set; } = 1.0f; // Value between 0 (transparent) and 1 (opaque)
 
-        using (SolidBrush brush = new SolidBrush(Color.FromArgb((int)(Opacity * 255), this.BackColor)))
+        protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(brush, this.ClientRectangle);
-        }
-    }
+            base.OnPaint(e);
 
-    protected override void OnPaintBackground(PaintEventArgs e)
-    {
-        // Avoid default background painting to maintain transparency effect
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb((int)(Opacity * 255), this.BackColor)))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            // Avoid default background painting to maintain transparency effect
+        }
     }
 }

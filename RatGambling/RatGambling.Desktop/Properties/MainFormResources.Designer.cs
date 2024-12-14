@@ -73,16 +73,6 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap black_joker {
-            get {
-                object obj = ResourceManager.GetObject("black_joker", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap buttonLeer {
             get {
                 object obj = ResourceManager.GetObject("buttonLeer", resourceCulture);
@@ -186,16 +176,6 @@ namespace RatGambling.Desktop.Properties {
         internal static System.Drawing.Bitmap rat_walking {
             get {
                 object obj = ResourceManager.GetObject("rat_walking", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap red_joker {
-            get {
-                object obj = ResourceManager.GetObject("red_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

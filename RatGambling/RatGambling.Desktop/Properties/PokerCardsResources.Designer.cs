@@ -463,6 +463,16 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap black_joker {
+            get {
+                object obj = ResourceManager.GetObject("black_joker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap jack_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("jack_of_clubs", resourceCulture);
@@ -543,9 +553,19 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap queen_of_clubs2 {
+        internal static System.Drawing.Bitmap not_found {
             get {
-                object obj = ResourceManager.GetObject("queen_of_clubs2", resourceCulture);
+                object obj = ResourceManager.GetObject("not_found", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap queen_of_clubs {
+            get {
+                object obj = ResourceManager.GetObject("queen_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -576,6 +596,16 @@ namespace RatGambling.Desktop.Properties {
         internal static System.Drawing.Bitmap queen_of_spades {
             get {
                 object obj = ResourceManager.GetObject("queen_of_spades", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap red_joker {
+            get {
+                object obj = ResourceManager.GetObject("red_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -8,20 +8,6 @@ namespace RatGambling.Core.src.Card
 {
     public class Card
     {
-        public static List<Card> CreateDeck()
-        {
-            List<Card> deck = new();
-            foreach(CardSuit suit in Enum.GetValues(typeof(CardSuit)))
-            {
-                foreach(CardValue type in Enum.GetValues(typeof(CardValue)))
-                {
-                    deck.Add(new(type, suit));
-                }
-            }
-            return deck;
-        }
-
-
         private readonly CardSuit _suit;
         public CardSuit Suit => _suit;
 
@@ -35,6 +21,6 @@ namespace RatGambling.Core.src.Card
             _type = type;
         }
 
-        public override string ToString() => $"{_type} of {_suit}";
+        public override string ToString() => $"{Enum.GetName(typeof(CardValue), _type)} of {_suit}";
     }
 }

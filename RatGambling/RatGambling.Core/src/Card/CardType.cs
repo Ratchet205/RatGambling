@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace RatGambling.Core.src.Card
 {
-    public enum CardValue
+    public enum CardType
     {
-        Joker = 1,
+        Joker = 0,
+        Ace = 1,
         Two = 2,
         Three = 3,
         Four = 4,
@@ -18,9 +19,8 @@ namespace RatGambling.Core.src.Card
         Eight = 8,
         Nine = 9,
         Ten = 10,
-        Jack = 10,
-        Queen = 10,
-        King = 10,
-        Ace = 11
+        Jack = 11,
+        Queen = 12,
+        King = 13
     }
 }

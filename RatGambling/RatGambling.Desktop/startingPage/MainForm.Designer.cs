@@ -56,8 +56,7 @@ namespace RatGambling.Desktop.startingPage
             pBPlayButton.TabStop = false;
             pBPlayButton.Click += pBPlayButton_Click;
             pBPlayButton.MouseDown += pBPlayButton_MouseDown;
-            pBPlayButton.MouseEnter += pBPlayButton_MouseEnter;
-            pBPlayButton.MouseLeave += pBPlayButton_MouseLeave;
+            pBPlayButton.MouseMove += pBPlayButton_MouseMove;
             pBPlayButton.MouseUp += pBPlayButton_MouseUp;
             // 
             // pBRatStanding

@@ -1,35 +1,62 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using System.Windows.Forms;
-using BCrypt.Net;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace RatGambling.Desktop.startingPage
 {
-    public partial class LoginForm : Form
+    public partial class RegisterForm : Form
     {
-        public event EventHandler<string> OptionSelected;
         private MainForm parent = new();
         private float currentRotationAngle = 0;
         private System.Windows.Forms.Timer rotationTimer = new();
         private bool isRotating = false;
+        public event EventHandler<string> OptionSelected;
         string? selectedLink;
         private int rotationDirection = 1;
         private Random random = new Random();
         private Bitmap buttonImage;
-
-        public LoginForm(MainForm parent)
+        public RegisterForm(MainForm parent)
         {
             InitializeComponent();
             this.parent = parent;
             InitializeSubmitButtonRotation();
             buttonImage = new Bitmap(pBSubmit.Image);
-        }
 
-        public LoginForm()
+            tBEmail.TextChanged += TextBox_TextChanged;
+            tBPassword.TextChanged += TextBox_TextChanged;
+            tBConfirmPassword.TextChanged += TextBox_TextChanged;
+            tBName.TextChanged += TextBox_TextChanged;
+            cBAccountRemember.CheckStateChanged += TextBox_TextChanged;
+            cBOver18Request.CheckStateChanged += TextBox_TextChanged;
+            tBEmail.Enter += TextBox_TextChanged;
+            tBPassword.Enter += TextBox_TextChanged;
+            tBConfirmPassword.Enter += TextBox_TextChanged;
+            tBName.Enter += TextBox_TextChanged;
+            cBAccountRemember.Enter += TextBox_TextChanged;
+            cBOver18Request.Enter += TextBox_TextChanged;
+
+        }
+        public RegisterForm()
         {
             InitializeComponent();
             InitializeSubmitButtonRotation();
+        }
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            tBEmail.TabStop = true;
+            tBPassword.TabStop = true;
+            tBConfirmPassword.TabStop = true;
+            tBName.TabStop = true;
+            cBAccountRemember.TabStop = true;
+            cBOver18Request.TabStop = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -50,53 +77,22 @@ namespace RatGambling.Desktop.startingPage
                 e.Graphics.DrawRectangle(pen, rect);
             }
         }
-
-        private void Log_RegForm_Deactivate(object sender, EventArgs e)
+        private void RegisterForm_Deactivate(object sender, EventArgs e)
         {
             if (selectedLink == null)
             {
                 parent?.glassPanel.Dispose();
+                Close();
             }
-            Close();
         }
 
-        private void Log_RegForm_Load(object sender, EventArgs e)
+        private void RegisterForm_Load(object sender, EventArgs e)
         {
-            Location = new Point(
-                parent.Location.X + parent.Width / 2 - Width / 2,
-                parent.Location.Y + parent.Height / 2 - Height / 2);
-        }
-        void UpdateLabelPosition()
-        {
-            lLoginError.AutoSize = true;
-            lLoginError.Left = (this.ClientSize.Width - lLoginError.Width) / 2;
-        }
 
+        }
         private void pBSubmit_Click(object sender, EventArgs e)
         {
 
-        }
-        private bool IsValidEmail(string email)
-        {
-            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            return Regex.IsMatch(email, emailPattern);
-        }
-
-        private bool IsCorrectUsernameOrPassword(string email, string password)
-        {
-            throw new NotImplementedException(); // Implementiere DB-Passwort Überprüfung
-        }
-
-        private void SaveToDatabase(string email, string hashedPassword, bool keepLogin)
-        {
-            throw new NotImplementedException(); // Implementiere DB-Logik hier
-        }
-
-        private void InitializeSubmitButtonRotation()
-        {
-            rotationTimer = new System.Windows.Forms.Timer();
-            rotationTimer.Interval = 10;
-            rotationTimer.Tick += RotationTimer_Tick;
         }
 
         private void RotationTimer_Tick(object? sender, EventArgs e)
@@ -105,18 +101,6 @@ namespace RatGambling.Desktop.startingPage
 
             currentRotationAngle = (currentRotationAngle + rotationDirection * 2) % 360;
 
-            pBSubmit.Invalidate();
-        }
-
-        private void pBSubmit_MouseEnter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pBSubmit_MouseLeave(object sender, EventArgs e)
-        {
-            isRotating = false;
-            rotationTimer.Stop();
             pBSubmit.Invalidate();
         }
 
@@ -137,46 +121,35 @@ namespace RatGambling.Desktop.startingPage
 
             g.Restore(state);
         }
-
-        private void tBPassword_Validated(object sender, EventArgs e)
+        private void InitializeSubmitButtonRotation()
         {
-            Focus();
+            rotationTimer = new System.Windows.Forms.Timer();
+            rotationTimer.Interval = 10;
+            rotationTimer.Tick += RotationTimer_Tick;
         }
 
-        private void tBEmail_TextChanged(object sender, EventArgs e)
+        private void pBBackToLogin_Click(object sender, EventArgs e)
         {
-            tBEmail.TabStop = true;
-            tBPassword.TabStop = true;
-            cBAccountRemember.TabStop = true;
-            lLPWReset.TabStop = false;
-            lLRegister.TabStop = false;
-        }
-
-        private void lLPWReset_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            selectedLink = "Reset";
+            selectedLink = "back";
+            OptionSelected?.Invoke(this, "ProcessRepeat");
             this.Close();
-            OptionSelected?.Invoke(this, "PWReset");
-            selectedLink = null;
-        }
-
-        private void lLRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            selectedLink = "Register";
-            this.Close();
-            OptionSelected?.Invoke(this, "Register");
             selectedLink = null;
         }
 
         private void pBSubmit_MouseDown(object sender, MouseEventArgs e)
         {
-            if (IsTransparentPixel(e.Location))
+            // Prüfen, ob der angeklickte Pixel transparent ist
+            Point clickLocation = e.Location; // Die Klickposition relativ zur PictureBox
+            if (IsTransparentPixel(clickLocation))
             {
-                return;
+                return; // Klick ignorieren, wenn es ein transparenter Bereich ist
             }
 
+            string name = tBName.Text;
             string email = tBEmail.Text;
             string password = tBPassword.Text;
+            string confirmPassword = tBConfirmPassword.Text;
+            bool over18 = cBOver18Request.Checked;
 
             if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(password))
             {
@@ -198,34 +171,73 @@ namespace RatGambling.Desktop.startingPage
                 lLoginError.Text = "The password field is required.";
                 UpdateLabelPosition();
             }
-            else if (!IsCorrectUsernameOrPassword(email, password))
+            else if (string.IsNullOrWhiteSpace(confirmPassword))
             {
-                lLoginError.Text = "Incorrect username or password.";
+                lLoginError.Text = "Please confirm your password.";
+                UpdateLabelPosition();
+            }
+            else if (tBPassword.Text != tBConfirmPassword.Text)
+            {
+                lLoginError.Text = "Passwords do not match.";
+                UpdateLabelPosition();
+            }
+            else if (!over18)
+            {
+                lLoginError.Text = "You must be over 18 to sign in.";
                 UpdateLabelPosition();
             }
             else
             {
                 string hashedPW = BCrypt.Net.BCrypt.HashPassword(password);
                 bool keepLogin = cBAccountRemember.Checked;
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    name = "User1";
+                }
 
-                SaveToDatabase(email, hashedPW, keepLogin);
+                throw new NotImplementedException(); //In DB reinschreiben danach anmelden
+
                 Close();
             }
         }
+        void UpdateLabelPosition()
+        {
+            lLoginError.AutoSize = true;
+            lLoginError.Left = (this.ClientSize.Width - lLoginError.Width) / 2;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+        // Passwort-Validierung
+        private bool IsValidPassword(string password)
+        {
+            // Mindestens ein Großbuchstabe, eine Zahl und ein Sonderzeichen
+            var passwordPattern = @"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$";
+            return Regex.IsMatch(password, passwordPattern);
+        }
+
 
         private bool IsTransparentPixel(Point clickLocation)
         {
+            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
             float scaleX = (float)buttonImage.Width / pBSubmit.Width;
             float scaleY = (float)buttonImage.Height / pBSubmit.Height;
 
             int imageX = (int)(clickLocation.X * scaleX);
             int imageY = (int)(clickLocation.Y * scaleY);
 
+            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
             if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true;
+                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
 
+            // Farbe des Pixels prüfen
             Color pixelColor = buttonImage.GetPixel(imageX, imageY);
 
+            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
             return pixelColor.A == 0;
         }
 
@@ -252,31 +264,23 @@ namespace RatGambling.Desktop.startingPage
             }
         }
 
-        private void tBEmail_Enter(object sender, EventArgs e)
+        private void pBSubmit_MouseLeave(object sender, EventArgs e)
         {
-            tBEmail.TabStop = true;
-            tBPassword.TabStop = true;
-            cBAccountRemember.TabStop = true;
-            lLPWReset.TabStop = false;
-            lLRegister.TabStop = false;
+            isRotating = false;
+            rotationTimer.Stop();
+            pBSubmit.Invalidate();
         }
 
-        private void tBPassword_Enter(object sender, EventArgs e)
+        private void cBOver18Request_CheckedChanged(object sender, EventArgs e)
         {
-            tBEmail.TabStop = true;
-            tBPassword.TabStop = true;
-            cBAccountRemember.TabStop = true;
-            lLPWReset.TabStop = false;
-            lLRegister.TabStop = false;
-        }
-
-        private void tBPassword_TextChanged(object sender, EventArgs e)
-        {
-            tBEmail.TabStop = true;
-            tBPassword.TabStop = true;
-            cBAccountRemember.TabStop = true;
-            lLPWReset.TabStop = false;
-            lLRegister.TabStop = false;
+            if (cBOver18Request.Checked)
+            {
+                cBOver18Request.ForeColor = Color.GreenYellow;
+            }
+            else
+            {
+                cBOver18Request.ForeColor = Color.Red;
+            }
         }
 
         private void cBAccountRemember_CheckedChanged(object sender, EventArgs e)

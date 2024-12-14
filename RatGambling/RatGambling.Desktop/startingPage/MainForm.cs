@@ -12,6 +12,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 
 namespace RatGambling.Desktop.startingPage
@@ -46,9 +47,12 @@ namespace RatGambling.Desktop.startingPage
         #region ProfileMenuButton
         bool isLoggedin = false;
         public DarkenPanel glassPanel = new();
-
+        private Bitmap buttonImage;
+        private Bitmap buttonImageo;
 
         #endregion
+
+
 
         public MainForm()
         {
@@ -60,6 +64,8 @@ namespace RatGambling.Desktop.startingPage
             unpressedImage = Properties.MainFormResources.play_button_unpressed;
             hoverImage = ApplyHoverEffect(unpressedImage);
             pressedImage = ApplyPressedEffect(Properties.MainFormResources.play_button_pressed);
+            buttonImage = new Bitmap(pBPlayButton.BackgroundImage);
+            buttonImageo = new Bitmap(Properties.MainFormResources.play_button_pressed);
             #endregion
             //
             //QuitButton 2/3
@@ -89,27 +95,54 @@ namespace RatGambling.Desktop.startingPage
         #region PlayButton
         private void pBPlayButton_Click(object sender, EventArgs e)
         {
-            //Open next Form
+            Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
+            if (IsTransparentPixel(mousePosition))
+            {
+                return;
+            }
         }
 
         private void pBPlayButton_MouseDown(object sender, MouseEventArgs e)
         {
+            Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
+            if (IsTransparentPixelO(mousePosition))
+            {
+                return;
+            }
             pBPlayButton.BackgroundImage = pressedImage;
         }
 
         private void pBPlayButton_MouseUp(object sender, MouseEventArgs e)
         {
+            Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
+            if (IsTransparentPixel(mousePosition))
+            {
+                return;
+            }
             pBPlayButton.BackgroundImage = hoverImage;
         }
 
-        private void pBPlayButton_MouseEnter(object sender, EventArgs e)
-        {
-            pBPlayButton.BackgroundImage = hoverImage;
-        }
+        private bool isMouseOverButton = false; // Verfolgt den Status, ob die Maus über dem sichtbaren Bereich ist
 
-        private void pBPlayButton_MouseLeave(object sender, EventArgs e)
+        private void pBPlayButton_MouseMove(object sender, MouseEventArgs e)
         {
-            pBPlayButton.BackgroundImage = unpressedImage;
+            // Mausposition relativ zur PictureBox
+            Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
+
+            // Prüfen, ob die Maus über einem sichtbaren Bereich des Bildes ist
+            bool isOverVisibleArea = !IsTransparentPixel(mousePosition);
+
+            // Zustand ändern, wenn Maus in sichtbaren Bereich eintritt oder verlässt
+            if (isOverVisibleArea && !isMouseOverButton)
+            {
+                isMouseOverButton = true;
+                pBPlayButton.BackgroundImage = hoverImage; // Bild setzen, wenn Maus den Button "betritt"
+            }
+            else if (!isOverVisibleArea && isMouseOverButton)
+            {
+                isMouseOverButton = false;
+                pBPlayButton.BackgroundImage = unpressedImage; // Bild setzen, wenn Maus den Button "verlässt"
+            }
         }
 
         private Image ApplyHoverEffect(Image original)
@@ -274,8 +307,12 @@ namespace RatGambling.Desktop.startingPage
 
             Controls.Add(glassPanel);
             glassPanel.BringToFront();
-            
+
             Invalidate();
+            GenerateLoginForm();
+        }
+        private void GenerateLoginForm()
+        {
 
             if (isLoggedin)
             {
@@ -284,13 +321,91 @@ namespace RatGambling.Desktop.startingPage
             }
             else
             {
-                LoginForm log_RegForm = new LoginForm(this);
-                log_RegForm.Show();
+                LoginForm loginForm = new LoginForm(this);
+                loginForm.OptionSelected += OptionSelected;
+                loginForm.Show();
             }
+        }
+        private void OptionSelected(object sender, string returnValue)
+        {
+            //glassPanel = new DarkenPanel
+            //{
+            //    Dock = DockStyle.Fill,
+            //    Opacity = 0.7f,
+            //    BackColor = Color.FromArgb(34, 10, 10)
+            //};
 
+            //Controls.Add(glassPanel);
+            //glassPanel.BringToFront();
+            //Invalidate();
+            switch (returnValue)
+            {
+                case "PWReset":
+                    ResetPasswordForm resetPasswordForm = new ResetPasswordForm(this);
+                    resetPasswordForm.OptionSelected += OptionSelected;
+                    resetPasswordForm.Show();
+                    resetPasswordForm.BringToFront();
+                    resetPasswordForm.Focus();
+                    break;
+                case "Register":
+                    RegisterForm registerForm = new RegisterForm(this);
+                    registerForm.OptionSelected += OptionSelected;
+                    registerForm.Show();
+                    registerForm.BringToFront();
+                    registerForm.Focus();
+                    break;
+                case "ProcessRepeat":
+                    GenerateLoginForm();
+                    break;
+            }
+            Invalidate();
         }
 
 
+
+
+
+
+
         #endregion
+
+        private bool IsTransparentPixel(Point clickLocation)
+        {
+            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
+            float scaleX = (float)buttonImage.Width / pBPlayButton.Width;
+            float scaleY = (float)buttonImage.Height / pBPlayButton.Height;
+
+            int imageX = (int)(clickLocation.X * scaleX);
+            int imageY = (int)(clickLocation.Y * scaleY);
+
+            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
+            if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
+                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
+
+            // Farbe des Pixels prüfen
+            Color pixelColor = buttonImage.GetPixel(imageX, imageY);
+
+            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
+            return pixelColor.A == 0;
+        }
+        private bool IsTransparentPixelO(Point clickLocation)
+        {
+            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
+            float scaleX = (float)buttonImageo.Width / pBPlayButton.Width;
+            float scaleY = (float)buttonImageo.Height / pBPlayButton.Height;
+
+            int imageX = (int)(clickLocation.X * scaleX);
+            int imageY = (int)(clickLocation.Y * scaleY);
+
+            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
+            if (imageX < 0 || imageX >= buttonImageo.Width || imageY < 0 || imageY >= buttonImageo.Height)
+                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
+
+            // Farbe des Pixels prüfen
+            Color pixelColor = buttonImageo.GetPixel(imageX, imageY);
+
+            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
+            return pixelColor.A == 0;
+        }
     }
 }

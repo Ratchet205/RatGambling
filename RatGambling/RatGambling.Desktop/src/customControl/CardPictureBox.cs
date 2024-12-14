@@ -89,9 +89,9 @@ namespace RatGambling.Desktop.src.customControl
             this.card = card;
         }
 
-        public CardPictureBox(CardSuit suit, CardType value) : this()
+        public CardPictureBox(CardSuit suit, CardType type) : this()
         {
-            card = new Card(value, suit);
+            card = new Card(type, suit);
         }
 
         private CardPictureBox()

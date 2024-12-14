@@ -121,9 +121,6 @@
   <data name="headline_RadGambling" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\headline_RadGambling.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="submit_button_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\resources\textures\MainPage\submit_button_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="rat_walking" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\rat_walking.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -148,17 +145,11 @@
   <data name="rat_standing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\rat_standing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="submit_button_blue1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\resources\textures\MainPage\submit_button_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="standartUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\standartUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Background_Color" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\Background_Color.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="black_joker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\src\resources\textures\MainPage\black_joker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="play_button_pressed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\play_button_pressed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,10 +160,13 @@
   <data name="submit_button_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\submit_button_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="submit_button_green1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="submit_button_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\submit_button_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="submit_button_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\src\resources\textures\MainPage\submit_button_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrowBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\src\resources\textures\MainPage\arrowBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

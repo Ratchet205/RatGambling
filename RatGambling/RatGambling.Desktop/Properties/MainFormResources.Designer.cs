@@ -213,29 +213,9 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap submit_button_blue1 {
-            get {
-                object obj = ResourceManager.GetObject("submit_button_blue1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap submit_button_green {
             get {
                 object obj = ResourceManager.GetObject("submit_button_green", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap submit_button_green1 {
-            get {
-                object obj = ResourceManager.GetObject("submit_button_green1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

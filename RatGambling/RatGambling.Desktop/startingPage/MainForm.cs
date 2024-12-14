@@ -1,5 +1,6 @@
 ﻿using RatGambling.Desktop.Properties;
 using RatGambling.Desktop.src;
+using RatGambling.Desktop.src.customControl;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

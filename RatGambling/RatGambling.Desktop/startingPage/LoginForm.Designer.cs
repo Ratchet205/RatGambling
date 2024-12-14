@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             pictureBox1 = new PictureBox();
             tBEmail = new TextBox();
             tBPassword = new TextBox();
@@ -44,7 +43,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Image = Properties.MainFormResources.GameLogo;
             pictureBox1.Location = new Point(138, 30);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(126, 126);
@@ -85,7 +84,7 @@
             // 
             // pBSubmit
             // 
-            pBSubmit.Image = Properties.MainFormResources.submit_button_green1;
+            pBSubmit.Image = Properties.MainFormResources.submit_button_green;
             pBSubmit.Location = new Point(138, 299);
             pBSubmit.Name = "pBSubmit";
             pBSubmit.Size = new Size(126, 126);

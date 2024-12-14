@@ -48,8 +48,8 @@ namespace RatGambling.Desktop.startingPage
         #region ProfileMenuButton
         readonly bool isLoggedin = false;
         public DarkenPanel glassPanel = new();
-        private Bitmap buttonImage;
-        private Bitmap buttonImageo;
+        private readonly Bitmap buttonImage;
+        private readonly Bitmap buttonImageo;
 
         #endregion
 
@@ -62,11 +62,11 @@ namespace RatGambling.Desktop.startingPage
             //PlayButton 2/3
             //
             #region PlayButton
-            unpressedImage = Properties.MainFormResources.play_button_unpressed;
+            unpressedImage = MainFormResources.play_button_unpressed;
             hoverImage = ApplyHoverEffect(unpressedImage);
-            pressedImage = ApplyPressedEffect(Properties.MainFormResources.play_button_pressed);
-            buttonImage = new Bitmap(pBPlayButton.BackgroundImage);
-            buttonImageo = new Bitmap(Properties.MainFormResources.play_button_pressed);
+            pressedImage = ApplyPressedEffect(MainFormResources.play_button_pressed);
+            buttonImage = MainFormResources.play_button_unpressed;
+            buttonImageo = MainFormResources.play_button_pressed;
             #endregion
             //
             //QuitButton 2/3
@@ -148,16 +148,16 @@ namespace RatGambling.Desktop.startingPage
             }
         }
 
-        private Image ApplyHoverEffect(Image original)
+        private static Bitmap ApplyHoverEffect(Image original)
         {
             var colorMatrix = new ColorMatrix(
-                new float[][]{
-                    new float[] {0.5f, 0, 0, 0, 0},
-                    new float[] {0, 0.5f, 0, 0, 0},
-                    new float[] {0, 0, 0.5f, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {0, 0, 0, 0, 1}
-                }
+                [
+                    [0.5f, 0, 0, 0, 0],
+                    [0, 0.5f, 0, 0, 0],
+                    [0, 0, 0.5f, 0, 0],
+                    [0, 0, 0, 1, 0],
+                    [0, 0, 0, 0, 1],
+                ]
             );
 
             var imageAttributes = new ImageAttributes();
@@ -173,16 +173,16 @@ namespace RatGambling.Desktop.startingPage
 
             return grayscaleImage;
         }
-        private Bitmap ApplyPressedEffect(Image original)
+        private static Bitmap ApplyPressedEffect(Image original)
         {
             var colorMatrix = new ColorMatrix(
-                new float[][]{
-                    new float[] {0.4f, 0, 0, 0, 0},
-                    new float[] {0, 0.4f, 0, 0, 0},
-                    new float[] {0, 0, 0.4f, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {0, 0, 0, 0, 1}
-                }
+                [
+                    [0.4f, 0, 0, 0, 0],
+                    [0, 0.4f, 0, 0, 0],
+                    [0, 0, 0.4f, 0, 0],
+                    [0, 0, 0, 1, 0],
+                    [0, 0, 0, 0, 1]
+                ]
             );
 
             var imageAttributes = new ImageAttributes();
@@ -264,7 +264,7 @@ namespace RatGambling.Desktop.startingPage
             }
         }
 
-        private Bitmap? ConvertToGrayscale(Image originalImage)
+        private static Bitmap? ConvertToGrayscale(Image originalImage)
         {
             if (originalImage == null)
             {
@@ -275,13 +275,13 @@ namespace RatGambling.Desktop.startingPage
             using (Graphics g = Graphics.FromImage(grayscaleBitmap))
             {
                 ColorMatrix colorMatrix = new(
-                    new float[][]{
-                        new float[] {10f, 0, 0, 0, 0},
-                        new float[] {0, 1f, 0, 0, 0},
-                        new float[] {0, 0, 1f, 0, 0},
-                        new float[] {0, 0, 0, 1f, 0},
-                        new float[] {0, 0, 0, 0, 1}
-                    });
+                    [
+                        [10f, 0, 0, 0, 0],
+                        [0, 1f, 0, 0, 0],
+                        [0, 0, 1f, 0, 0],
+                        [0, 0, 0, 1f, 0],
+                        [0, 0, 0, 0, 1]
+                    ]);
 
                 using ImageAttributes attributes = new();
                 attributes.SetColorMatrix(colorMatrix);
@@ -322,17 +322,12 @@ namespace RatGambling.Desktop.startingPage
             }
             else
             {
-<<<<<<< Updated upstream
-                LoginForm loginForm = new LoginForm(this);
+                LoginForm loginForm = new(this);
                 loginForm.OptionSelected += OptionSelected;
                 loginForm.Show();
-=======
-                LoginForm log_RegForm = new(this);
-                log_RegForm.Show();
->>>>>>> Stashed changes
             }
         }
-        private void OptionSelected(object sender, string returnValue)
+        private void OptionSelected(object? sender, string returnValue)
         {
             //glassPanel = new DarkenPanel
             //{
@@ -347,14 +342,14 @@ namespace RatGambling.Desktop.startingPage
             switch (returnValue)
             {
                 case "PWReset":
-                    ResetPasswordForm resetPasswordForm = new ResetPasswordForm(this);
+                    ResetPasswordForm resetPasswordForm = new(this);
                     resetPasswordForm.OptionSelected += OptionSelected;
                     resetPasswordForm.Show();
                     resetPasswordForm.BringToFront();
                     resetPasswordForm.Focus();
                     break;
                 case "Register":
-                    RegisterForm registerForm = new RegisterForm(this);
+                    RegisterForm registerForm = new(this);
                     registerForm.OptionSelected += OptionSelected;
                     registerForm.Show();
                     registerForm.BringToFront();

@@ -14,15 +14,15 @@ namespace RatGambling.Desktop.startingPage
 {
     public partial class RegisterForm : Form
     {
-        private MainForm parent = new();
+        private readonly MainForm parent = new();
         private float currentRotationAngle = 0;
         private System.Windows.Forms.Timer rotationTimer = new();
         private bool isRotating = false;
-        public event EventHandler<string> OptionSelected;
+        public event EventHandler<string>? OptionSelected;
         string? selectedLink;
         private int rotationDirection = 1;
-        private Random random = new Random();
-        private Bitmap buttonImage;
+        private readonly Random random = new();
+        private readonly Bitmap? buttonImage;
         public RegisterForm(MainForm parent)
         {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace RatGambling.Desktop.startingPage
             InitializeComponent();
             InitializeSubmitButtonRotation();
         }
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        private void TextBox_TextChanged(object? sender, EventArgs e)
         {
             tBEmail.TabStop = true;
             tBPassword.TabStop = true;
@@ -66,16 +66,14 @@ namespace RatGambling.Desktop.startingPage
             int borderWidth = 2;
             Color borderColor = Color.FromArgb(0xc3, 0x3f, 0x3f);
 
-            using (Pen pen = new Pen(borderColor, borderWidth))
-            {
-                Rectangle rect = new Rectangle(
-                    borderWidth / 2,
-                    borderWidth / 2,
-                    this.ClientSize.Width - borderWidth,
-                    this.ClientSize.Height - borderWidth);
+            using Pen pen = new(borderColor, borderWidth);
+            Rectangle rect = new(
+                borderWidth / 2,
+                borderWidth / 2,
+                this.ClientSize.Width - borderWidth,
+                this.ClientSize.Height - borderWidth);
 
-                e.Graphics.DrawRectangle(pen, rect);
-            }
+            e.Graphics.DrawRectangle(pen, rect);
         }
         private void RegisterForm_Deactivate(object sender, EventArgs e)
         {
@@ -123,8 +121,10 @@ namespace RatGambling.Desktop.startingPage
         }
         private void InitializeSubmitButtonRotation()
         {
-            rotationTimer = new System.Windows.Forms.Timer();
-            rotationTimer.Interval = 10;
+            rotationTimer = new()
+            {
+                Interval = 10
+            };
             rotationTimer.Tick += RotationTimer_Tick;
         }
 
@@ -197,7 +197,7 @@ namespace RatGambling.Desktop.startingPage
 
                 throw new NotImplementedException(); //In DB reinschreiben danach anmelden
 
-                Close();
+                //Close();
             }
         }
         void UpdateLabelPosition()
@@ -206,14 +206,14 @@ namespace RatGambling.Desktop.startingPage
             lLoginError.Left = (this.ClientSize.Width - lLoginError.Width) / 2;
         }
 
-        private bool IsValidEmail(string email)
+        private static bool IsValidEmail(string email)
         {
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, emailPattern);
         }
 
         // Passwort-Validierung
-        private bool IsValidPassword(string password)
+        private static bool IsValidPassword(string password)
         {
             // Mindestens ein Großbuchstabe, eine Zahl und ein Sonderzeichen
             var passwordPattern = @"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$";
@@ -224,6 +224,7 @@ namespace RatGambling.Desktop.startingPage
         private bool IsTransparentPixel(Point clickLocation)
         {
             // Konvertiere die Klickkoordinaten in die Bildkoordinaten
+            if (buttonImage == null) return true;
             float scaleX = (float)buttonImage.Width / pBSubmit.Width;
             float scaleY = (float)buttonImage.Height / pBSubmit.Height;
 

@@ -10,7 +10,7 @@ namespace RatGambling.Core.src.Card
     public class CardDeck : IEnumerable<Card>
     {
         private List<Card> cards = [];
-        private List<CardType> excludees = [];
+        private readonly List<CardType> excludees = [];
         public List<CardType> Excludees => excludees;
 
         public CardDeck() { }
@@ -68,11 +68,11 @@ namespace RatGambling.Core.src.Card
             {
                 // Split the deck roughly in half
                 int halfSize = cards.Count / 2;
-                List<Card> deckHalfA = new List<Card>(cards.Take(halfSize));
-                List<Card> deckHalfB = new List<Card>(cards.Skip(halfSize));
+                List<Card> deckHalfA = new(cards.Take(halfSize));
+                List<Card> deckHalfB = new(cards.Skip(halfSize));
 
                 cards.Clear();
-                Random rnd = new Random();
+                Random rnd = new();
 
                 // Perform a riffle shuffle by interleaving cards from each half
                 while (deckHalfA.Count > 0 || deckHalfB.Count > 0)
@@ -118,7 +118,7 @@ namespace RatGambling.Core.src.Card
 
         public void CreateDeck()
         {
-            List<Card> deck = new();
+            List<Card> deck = [];
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
                 foreach (CardType type in Enum.GetValues(typeof(CardType)))
@@ -134,7 +134,7 @@ namespace RatGambling.Core.src.Card
 
         public void CreateDeck(params CardType[] values)
         {
-            List<Card> deck = new();
+            List<Card> deck = [];
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
                 foreach (CardType type in Enum.GetValues(typeof(CardType)))

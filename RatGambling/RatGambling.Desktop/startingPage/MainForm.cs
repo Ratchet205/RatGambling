@@ -24,29 +24,29 @@ namespace RatGambling.Desktop.startingPage
         //PlayButton 1/3
         //
         #region PlayButton
-        private Image unpressedImage;
-        private Image hoverImage;
-        private Image pressedImage;
+        private readonly Image unpressedImage;
+        private readonly Image hoverImage;
+        private readonly Image pressedImage;
         #endregion
         //
         //QuitButton 1/3
         //
         #region QuitButton
         //Hover-Event
-        private System.Windows.Forms.Timer shakeTimer;
-        private int shakeDistance = 5;
-        private int shakeSpeed = 40;
-        private Random random = new Random();
+        private readonly System.Windows.Forms.Timer shakeTimer;
+        private readonly int shakeDistance = 5;
+        private readonly int shakeSpeed = 40;
+        private readonly Random random = new();
         private Point originalLocation;
 
         //Down-Event
-        private Image originalImage;
+        private readonly Image originalImage;
         #endregion
         //
         //ProfileMenuButton 1/3
         //
         #region ProfileMenuButton
-        bool isLoggedin = false;
+        readonly bool isLoggedin = false;
         public DarkenPanel glassPanel = new();
         private Bitmap buttonImage;
         private Bitmap buttonImageo;
@@ -74,8 +74,10 @@ namespace RatGambling.Desktop.startingPage
             #region QuitButton
             //Hover-Event
             originalLocation = pBQuitButton.Location;
-            shakeTimer = new System.Windows.Forms.Timer();
-            shakeTimer.Interval = shakeSpeed;
+            shakeTimer = new()
+            {
+                Interval = shakeSpeed
+            };
             shakeTimer.Tick += ShakeTimer_Tick;
 
             //Down-Event
@@ -162,7 +164,7 @@ namespace RatGambling.Desktop.startingPage
             imageAttributes.SetColorMatrix(colorMatrix);
 
             // Ein neues Bitmap mit Graustufen erstellen
-            Bitmap grayscaleImage = new Bitmap(original.Width, original.Height);
+            Bitmap grayscaleImage = new(original.Width, original.Height);
             using (Graphics g = Graphics.FromImage(grayscaleImage))
             {
                 g.DrawImage(original, new Rectangle(0, 0, grayscaleImage.Width, grayscaleImage.Height),
@@ -171,7 +173,7 @@ namespace RatGambling.Desktop.startingPage
 
             return grayscaleImage;
         }
-        private Image ApplyPressedEffect(Image original)
+        private Bitmap ApplyPressedEffect(Image original)
         {
             var colorMatrix = new ColorMatrix(
                 new float[][]{
@@ -187,7 +189,7 @@ namespace RatGambling.Desktop.startingPage
             imageAttributes.SetColorMatrix(colorMatrix);
 
             // Erstelle ein neues Bitmap mit dem "gedrückten" Effekt
-            Bitmap pressedImage = new Bitmap(original.Width, original.Height);
+            Bitmap pressedImage = new(original.Width, original.Height);
             using (Graphics g = Graphics.FromImage(pressedImage))
             {
                 g.DrawImage(original, new Rectangle(0, 0, pressedImage.Width, pressedImage.Height),
@@ -262,17 +264,17 @@ namespace RatGambling.Desktop.startingPage
             }
         }
 
-        private Image? ConvertToGrayscale(Image originalImage)
+        private Bitmap? ConvertToGrayscale(Image originalImage)
         {
             if (originalImage == null)
             {
                 return null;
             }
-            Bitmap grayscaleBitmap = new Bitmap(originalImage.Width, originalImage.Height);
+            Bitmap grayscaleBitmap = new(originalImage.Width, originalImage.Height);
 
             using (Graphics g = Graphics.FromImage(grayscaleBitmap))
             {
-                ColorMatrix colorMatrix = new ColorMatrix(
+                ColorMatrix colorMatrix = new(
                     new float[][]{
                         new float[] {10f, 0, 0, 0, 0},
                         new float[] {0, 1f, 0, 0, 0},
@@ -281,12 +283,10 @@ namespace RatGambling.Desktop.startingPage
                         new float[] {0, 0, 0, 0, 1}
                     });
 
-                using (ImageAttributes attributes = new ImageAttributes())
-                {
-                    attributes.SetColorMatrix(colorMatrix);
-                    g.DrawImage(originalImage, new Rectangle(0, 0, originalImage.Width, originalImage.Height),
-                        0, 0, originalImage.Width, originalImage.Height, GraphicsUnit.Pixel, attributes);
-                }
+                using ImageAttributes attributes = new();
+                attributes.SetColorMatrix(colorMatrix);
+                g.DrawImage(originalImage, new Rectangle(0, 0, originalImage.Width, originalImage.Height),
+                    0, 0, originalImage.Width, originalImage.Height, GraphicsUnit.Pixel, attributes);
             }
 
             return grayscaleBitmap;
@@ -317,14 +317,19 @@ namespace RatGambling.Desktop.startingPage
 
             if (isLoggedin)
             {
-                AccountForm accountForm = new AccountForm();
+                AccountForm accountForm = new();
                 accountForm.Show();
             }
             else
             {
+<<<<<<< Updated upstream
                 LoginForm loginForm = new LoginForm(this);
                 loginForm.OptionSelected += OptionSelected;
                 loginForm.Show();
+=======
+                LoginForm log_RegForm = new(this);
+                log_RegForm.Show();
+>>>>>>> Stashed changes
             }
         }
         private void OptionSelected(object sender, string returnValue)

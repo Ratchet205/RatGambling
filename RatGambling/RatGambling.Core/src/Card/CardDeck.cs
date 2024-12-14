@@ -10,8 +10,8 @@ namespace RatGambling.Core.src.Card
     public class CardDeck : IEnumerable<Card>
     {
         private List<Card> cards = [];
-        private List<CardValue> excludees = [];
-        public List<CardValue> Excludees => excludees;
+        private List<CardType> excludees = [];
+        public List<CardType> Excludees => excludees;
 
         public CardDeck() { }
         public CardDeck(List<Card> cards)
@@ -121,7 +121,7 @@ namespace RatGambling.Core.src.Card
             List<Card> deck = new();
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
-                foreach (CardValue type in Enum.GetValues(typeof(CardValue)))
+                foreach (CardType type in Enum.GetValues(typeof(CardType)))
                 {
                     if(!excludees.Contains(type))
                     {
@@ -132,12 +132,12 @@ namespace RatGambling.Core.src.Card
             cards = deck;
         }
 
-        public void CreateDeck(params CardValue[] values)
+        public void CreateDeck(params CardType[] values)
         {
             List<Card> deck = new();
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
-                foreach (CardValue type in Enum.GetValues(typeof(CardValue)))
+                foreach (CardType type in Enum.GetValues(typeof(CardType)))
                 {
                     if(!values.Contains(type))
                     {

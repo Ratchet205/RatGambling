@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RatGambling.Core.src.Card
 {
-    public enum CardValue
+    public enum CardType
     {
         Joker = 0,
         Ace = 1,

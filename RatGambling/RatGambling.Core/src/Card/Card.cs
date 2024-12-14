@@ -11,16 +11,16 @@ namespace RatGambling.Core.src.Card
         private readonly CardSuit _suit;
         public CardSuit Suit => _suit;
 
-        private readonly CardValue _type;
-        public CardValue Type => _type;
+        private readonly CardType _type;
+        public CardType Type => _type;
         public int Value => (int) _type;
 
-        public Card(CardValue type, CardSuit suit)
+        public Card(CardType type, CardSuit suit)
         {
             _suit = suit;
             _type = type;
         }
 
-        public override string ToString() => $"{Enum.GetName(typeof(CardValue), _type)} of {_suit}";
+        public override string ToString() => $"{Enum.GetName(typeof(CardType), _type)} of {_suit}";
     }
 }

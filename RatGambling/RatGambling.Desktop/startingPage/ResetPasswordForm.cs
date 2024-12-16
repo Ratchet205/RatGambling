@@ -11,7 +11,7 @@ namespace RatGambling.Desktop.startingPage
         private float currentRotationAngle = 0;
         private System.Windows.Forms.Timer rotationTimer = new();
         private bool isRotating = false;
-        public event EventHandler<string> OptionSelected;
+        public event EventHandler<string>? OptionSelected;
         string? selectedLink;
         private int rotationDirection = 1;
         private Random random = new Random();
@@ -30,6 +30,7 @@ namespace RatGambling.Desktop.startingPage
         {
             InitializeComponent();
             InitializeSubmitButtonRotation();
+            buttonImage = new Bitmap(pBSubmit.Image);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -62,7 +63,9 @@ namespace RatGambling.Desktop.startingPage
 
         private void ResetPasswordForm_Load(object sender, EventArgs e)
         {
-
+            Location = new Point(
+                parent.Location.X + parent.Width / 2 - Width / 2,
+                parent.Location.Y + parent.Height / 2 - Height / 2);
 
         }
 
@@ -130,14 +133,10 @@ namespace RatGambling.Desktop.startingPage
         }
         void UpdateLabelPosition()
         {
-            // Sicherstellen, dass das Label seine Größe automatisch anpasst
             lLoginError.AutoSize = true;
 
-            // Label horizontal zentrieren
             lLoginError.Left = (this.ClientSize.Width - lLoginError.Width) / 2;
 
-            // Optional: Vertikal platzieren (z. B. unterhalb eines bestimmten Elements)
-            // Beispiel: Vertikal unter der E-Mail-Textbox
             lLoginError.Top = tBEmail.Bottom + 10;
         }
         private bool IsValidEmail(string email)
@@ -152,21 +151,17 @@ namespace RatGambling.Desktop.startingPage
 
         private bool IsTransparentPixel(Point clickLocation)
         {
-            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
             float scaleX = (float)buttonImage.Width / pBSubmit.Width;
             float scaleY = (float)buttonImage.Height / pBSubmit.Height;
 
             int imageX = (int)(clickLocation.X * scaleX);
             int imageY = (int)(clickLocation.Y * scaleY);
 
-            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
             if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
+                return true;
 
-            // Farbe des Pixels prüfen
             Color pixelColor = buttonImage.GetPixel(imageX, imageY);
 
-            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
             return pixelColor.A == 0;
         }
 

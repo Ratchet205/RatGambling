@@ -46,7 +46,7 @@ namespace RatGambling.Desktop.startingPage
         //ProfileMenuButton 1/3
         //
         #region ProfileMenuButton
-        readonly bool isLoggedin = false;
+        readonly bool isLoggedin = false; // Logged in auf false stellen standart
         public DarkenPanel glassPanel = new();
         private readonly Bitmap buttonImage;
         private readonly Bitmap buttonImageo;
@@ -188,7 +188,6 @@ namespace RatGambling.Desktop.startingPage
             var imageAttributes = new ImageAttributes();
             imageAttributes.SetColorMatrix(colorMatrix);
 
-            // Erstelle ein neues Bitmap mit dem "gedrückten" Effekt
             Bitmap pressedImage = new(original.Width, original.Height);
             using (Graphics g = Graphics.FromImage(pressedImage))
             {
@@ -317,7 +316,7 @@ namespace RatGambling.Desktop.startingPage
 
             if (isLoggedin)
             {
-                AccountForm accountForm = new();
+                AccountForm accountForm = new(this);
                 accountForm.Show();
             }
             else
@@ -372,40 +371,32 @@ namespace RatGambling.Desktop.startingPage
 
         private bool IsTransparentPixel(Point clickLocation)
         {
-            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
             float scaleX = (float)buttonImage.Width / pBPlayButton.Width;
             float scaleY = (float)buttonImage.Height / pBPlayButton.Height;
 
             int imageX = (int)(clickLocation.X * scaleX);
             int imageY = (int)(clickLocation.Y * scaleY);
 
-            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
             if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
+                return true;
 
-            // Farbe des Pixels prüfen
             Color pixelColor = buttonImage.GetPixel(imageX, imageY);
 
-            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
             return pixelColor.A == 0;
         }
         private bool IsTransparentPixelO(Point clickLocation)
         {
-            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
             float scaleX = (float)buttonImageo.Width / pBPlayButton.Width;
             float scaleY = (float)buttonImageo.Height / pBPlayButton.Height;
 
             int imageX = (int)(clickLocation.X * scaleX);
             int imageY = (int)(clickLocation.Y * scaleY);
 
-            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
             if (imageX < 0 || imageX >= buttonImageo.Width || imageY < 0 || imageY >= buttonImageo.Height)
-                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
+                return true;
 
-            // Farbe des Pixels prüfen
             Color pixelColor = buttonImageo.GetPixel(imageX, imageY);
 
-            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
             return pixelColor.A == 0;
         }
     }

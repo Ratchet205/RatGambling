@@ -65,6 +65,7 @@
             tBPassword.ForeColor = Color.FromArgb(64, 64, 64);
             tBPassword.Location = new Point(79, 245);
             tBPassword.Name = "tBPassword";
+            tBPassword.PasswordChar = '•';
             tBPassword.PlaceholderText = "Password";
             tBPassword.Size = new Size(242, 19);
             tBPassword.TabIndex = 3;
@@ -125,6 +126,7 @@
             tBConfirmPassword.ForeColor = Color.FromArgb(64, 64, 64);
             tBConfirmPassword.Location = new Point(79, 275);
             tBConfirmPassword.Name = "tBConfirmPassword";
+            tBConfirmPassword.PasswordChar = '•';
             tBConfirmPassword.PlaceholderText = "Confirm Password";
             tBConfirmPassword.Size = new Size(242, 19);
             tBConfirmPassword.TabIndex = 4;

@@ -28,12 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "AccountForm";
+            pPersInformations = new Panel();
+            pMainPanel = new src.customControl.ScrollablePanel();
+            pMainPanel.SuspendLayout();
+            SuspendLayout();
+            // 
+            // pPersInformations
+            // 
+            pPersInformations.BackColor = Color.FromArgb(44, 44, 44);
+            pPersInformations.Location = new Point(39, 30);
+            pPersInformations.Margin = new Padding(30);
+            pPersInformations.Name = "pPersInformations";
+            pPersInformations.Padding = new Padding(20);
+            pPersInformations.Size = new Size(322, 177);
+            pPersInformations.TabIndex = 0;
+            pPersInformations.Paint += pPersInformations_Paint;
+            // 
+            // pMainPanel
+            // 
+            pMainPanel.AutoScroll = true;
+            pMainPanel.Controls.Add(pPersInformations);
+            pMainPanel.Location = new Point(0, 0);
+            pMainPanel.Name = "pMainPanel";
+            pMainPanel.Size = new Size(400, 500);
+            pMainPanel.TabIndex = 1;
+            // 
+            // AccountForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(54, 54, 54);
+            ClientSize = new Size(400, 500);
+            Controls.Add(pMainPanel);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "AccountForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "AccountForm";
+            Deactivate += AccountForm_Deactivate;
+            Load += AccountForm_Load;
+            pMainPanel.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel pPersInformations;
+        private src.customControl.ScrollablePanel pMainPanel;
     }
 }

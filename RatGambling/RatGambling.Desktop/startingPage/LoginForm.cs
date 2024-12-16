@@ -8,7 +8,7 @@ namespace RatGambling.Desktop.startingPage
 {
     public partial class LoginForm : Form
     {
-        public event EventHandler<string> OptionSelected;
+        public event EventHandler<string>? OptionSelected;
         private MainForm parent = new();
         private float currentRotationAngle = 0;
         private System.Windows.Forms.Timer rotationTimer = new();
@@ -30,6 +30,7 @@ namespace RatGambling.Desktop.startingPage
         {
             InitializeComponent();
             InitializeSubmitButtonRotation();
+            buttonImage = new Bitmap(pBSubmit.Image);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -283,7 +284,7 @@ namespace RatGambling.Desktop.startingPage
         {
             if (cBAccountRemember.Checked)
             {
-                cBAccountRemember.ForeColor = Color.GreenYellow;
+                cBAccountRemember.ForeColor = Color.FromArgb(0x0c,0x7a,0xe0);
             }
             else
             {

@@ -86,7 +86,9 @@ namespace RatGambling.Desktop.startingPage
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-
+            Location = new Point(
+                parent.Location.X + parent.Width / 2 - Width / 2,
+                parent.Location.Y + parent.Height / 2 - Height / 2);
         }
         private void pBSubmit_Click(object sender, EventArgs e)
         {
@@ -276,7 +278,7 @@ namespace RatGambling.Desktop.startingPage
         {
             if (cBOver18Request.Checked)
             {
-                cBOver18Request.ForeColor = Color.GreenYellow;
+                cBOver18Request.ForeColor = Color.FromArgb(0, 200, 71);
             }
             else
             {
@@ -288,7 +290,7 @@ namespace RatGambling.Desktop.startingPage
         {
             if (cBAccountRemember.Checked)
             {
-                cBAccountRemember.ForeColor = Color.GreenYellow;
+                cBAccountRemember.ForeColor = Color.FromArgb(0x0c, 0x7a, 0xe0);
             }
             else
             {

@@ -74,6 +74,7 @@
             tBPassword.ForeColor = Color.FromArgb(64, 64, 64);
             tBPassword.Location = new Point(79, 233);
             tBPassword.Name = "tBPassword";
+            tBPassword.PasswordChar = '•';
             tBPassword.PlaceholderText = "Password";
             tBPassword.Size = new Size(242, 19);
             tBPassword.TabIndex = 2;

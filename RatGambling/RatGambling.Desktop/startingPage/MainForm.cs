@@ -1,5 +1,6 @@
 ﻿using RatGambling.Desktop.Properties;
 using RatGambling.Desktop.src;
+using RatGambling.Desktop.src.classes;
 using RatGambling.Desktop.src.customControl;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,12 @@ namespace RatGambling.Desktop.startingPage
         //ProfileMenuButton 1/3
         //
         #region ProfileMenuButton
-        readonly bool isLoggedin = false; // Logged in auf false stellen standart
         public DarkenPanel glassPanel = new();
         private readonly Bitmap buttonImage;
         private readonly Bitmap buttonImageo;
 
         #endregion
-
+        readonly bool isLoggedin = true; // Logged in auf false stellen standart
 
 
         public MainForm()
@@ -92,6 +92,7 @@ namespace RatGambling.Desktop.startingPage
 
             #endregion
         }
+
         //
         //PlayButton 3/3
         //
@@ -99,16 +100,17 @@ namespace RatGambling.Desktop.startingPage
         private void pBPlayButton_Click(object sender, EventArgs e)
         {
             Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
-            if (IsTransparentPixel(mousePosition))
+            if (IsTransparentPixel.Check(buttonImage, mousePosition, pBPlayButton.Width, pBPlayButton.Height))
             {
                 return;
             }
+
         }
 
         private void pBPlayButton_MouseDown(object sender, MouseEventArgs e)
         {
             Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
-            if (IsTransparentPixelO(mousePosition))
+            if (IsTransparentPixel.Check(buttonImageo, mousePosition, pBPlayButton.Width, pBPlayButton.Height))
             {
                 return;
             }
@@ -118,10 +120,11 @@ namespace RatGambling.Desktop.startingPage
         private void pBPlayButton_MouseUp(object sender, MouseEventArgs e)
         {
             Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
-            if (IsTransparentPixel(mousePosition))
+            if (IsTransparentPixel.Check(buttonImage, mousePosition, pBPlayButton.Width, pBPlayButton.Height))
             {
                 return;
             }
+
             pBPlayButton.BackgroundImage = hoverImage;
         }
 
@@ -129,22 +132,19 @@ namespace RatGambling.Desktop.startingPage
 
         private void pBPlayButton_MouseMove(object sender, MouseEventArgs e)
         {
-            // Mausposition relativ zur PictureBox
             Point mousePosition = pBPlayButton.PointToClient(Cursor.Position);
 
-            // Prüfen, ob die Maus über einem sichtbaren Bereich des Bildes ist
-            bool isOverVisibleArea = !IsTransparentPixel(mousePosition);
+            bool isOverVisibleArea = !IsTransparentPixel.Check(buttonImage, mousePosition, pBPlayButton.Width, pBPlayButton.Height);
 
-            // Zustand ändern, wenn Maus in sichtbaren Bereich eintritt oder verlässt
             if (isOverVisibleArea && !isMouseOverButton)
             {
                 isMouseOverButton = true;
-                pBPlayButton.BackgroundImage = hoverImage; // Bild setzen, wenn Maus den Button "betritt"
+                pBPlayButton.BackgroundImage = hoverImage;
             }
             else if (!isOverVisibleArea && isMouseOverButton)
             {
                 isMouseOverButton = false;
-                pBPlayButton.BackgroundImage = unpressedImage; // Bild setzen, wenn Maus den Button "verlässt"
+                pBPlayButton.BackgroundImage = unpressedImage;
             }
         }
 
@@ -163,7 +163,6 @@ namespace RatGambling.Desktop.startingPage
             var imageAttributes = new ImageAttributes();
             imageAttributes.SetColorMatrix(colorMatrix);
 
-            // Ein neues Bitmap mit Graustufen erstellen
             Bitmap grayscaleImage = new(original.Width, original.Height);
             using (Graphics g = Graphics.FromImage(grayscaleImage))
             {
@@ -196,6 +195,7 @@ namespace RatGambling.Desktop.startingPage
             }
 
             return pressedImage;
+            
         }
         #endregion
 
@@ -328,16 +328,6 @@ namespace RatGambling.Desktop.startingPage
         }
         private void OptionSelected(object? sender, string returnValue)
         {
-            //glassPanel = new DarkenPanel
-            //{
-            //    Dock = DockStyle.Fill,
-            //    Opacity = 0.7f,
-            //    BackColor = Color.FromArgb(34, 10, 10)
-            //};
-
-            //Controls.Add(glassPanel);
-            //glassPanel.BringToFront();
-            //Invalidate();
             switch (returnValue)
             {
                 case "PWReset":
@@ -369,35 +359,6 @@ namespace RatGambling.Desktop.startingPage
 
         #endregion
 
-        private bool IsTransparentPixel(Point clickLocation)
-        {
-            float scaleX = (float)buttonImage.Width / pBPlayButton.Width;
-            float scaleY = (float)buttonImage.Height / pBPlayButton.Height;
 
-            int imageX = (int)(clickLocation.X * scaleX);
-            int imageY = (int)(clickLocation.Y * scaleY);
-
-            if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true;
-
-            Color pixelColor = buttonImage.GetPixel(imageX, imageY);
-
-            return pixelColor.A == 0;
-        }
-        private bool IsTransparentPixelO(Point clickLocation)
-        {
-            float scaleX = (float)buttonImageo.Width / pBPlayButton.Width;
-            float scaleY = (float)buttonImageo.Height / pBPlayButton.Height;
-
-            int imageX = (int)(clickLocation.X * scaleX);
-            int imageY = (int)(clickLocation.Y * scaleY);
-
-            if (imageX < 0 || imageX >= buttonImageo.Width || imageY < 0 || imageY >= buttonImageo.Height)
-                return true;
-
-            Color pixelColor = buttonImageo.GetPixel(imageX, imageY);
-
-            return pixelColor.A == 0;
-        }
     }
 }

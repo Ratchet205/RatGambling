@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RatGambling.Desktop.src.classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +23,7 @@ namespace RatGambling.Desktop.startingPage
         string? selectedLink;
         private int rotationDirection = 1;
         private readonly Random random = new();
-        private readonly Bitmap? buttonImage;
+        private readonly Bitmap buttonImage;
         public RegisterForm(MainForm parent)
         {
             InitializeComponent();
@@ -48,6 +49,7 @@ namespace RatGambling.Desktop.startingPage
         {
             InitializeComponent();
             InitializeSubmitButtonRotation();
+            buttonImage = new Bitmap(pBSubmit.Image);
         }
         private void TextBox_TextChanged(object? sender, EventArgs e)
         {
@@ -140,12 +142,12 @@ namespace RatGambling.Desktop.startingPage
 
         private void pBSubmit_MouseDown(object sender, MouseEventArgs e)
         {
-            // Prüfen, ob der angeklickte Pixel transparent ist
-            Point clickLocation = e.Location; // Die Klickposition relativ zur PictureBox
-            if (IsTransparentPixel(clickLocation))
+            Point clickLocation = e.Location;
+            if (IsTransparentPixel.Check(buttonImage, clickLocation, pBSubmit.Width, pBSubmit.Height))
             {
-                return; // Klick ignorieren, wenn es ein transparenter Bereich ist
+                return;
             }
+
 
             string name = tBName.Text;
             string email = tBEmail.Text;
@@ -222,33 +224,11 @@ namespace RatGambling.Desktop.startingPage
             return Regex.IsMatch(password, passwordPattern);
         }
 
-
-        private bool IsTransparentPixel(Point clickLocation)
-        {
-            // Konvertiere die Klickkoordinaten in die Bildkoordinaten
-            if (buttonImage == null) return true;
-            float scaleX = (float)buttonImage.Width / pBSubmit.Width;
-            float scaleY = (float)buttonImage.Height / pBSubmit.Height;
-
-            int imageX = (int)(clickLocation.X * scaleX);
-            int imageY = (int)(clickLocation.Y * scaleY);
-
-            // Sicherstellen, dass die Koordinaten im gültigen Bereich sind
-            if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true; // Klick außerhalb des Bildes behandeln wie "transparent"
-
-            // Farbe des Pixels prüfen
-            Color pixelColor = buttonImage.GetPixel(imageX, imageY);
-
-            // Wenn der Pixel transparent ist (Alpha = 0), zurückgeben
-            return pixelColor.A == 0;
-        }
-
         private void pBSubmit_MouseMove(object sender, MouseEventArgs e)
         {
             Point mousePosition = pBSubmit.PointToClient(Cursor.Position);
 
-            if (IsTransparentPixel(mousePosition))
+            if (IsTransparentPixel.Check(buttonImage, mousePosition, pBSubmit.Width, pBSubmit.Height))
             {
                 if (isRotating)
                 {
@@ -266,6 +246,7 @@ namespace RatGambling.Desktop.startingPage
                 rotationTimer.Start();
             }
         }
+
 
         private void pBSubmit_MouseLeave(object sender, EventArgs e)
         {

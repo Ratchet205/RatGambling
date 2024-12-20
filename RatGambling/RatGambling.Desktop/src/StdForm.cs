@@ -23,7 +23,7 @@ namespace RatGambling.Desktop.src
 
         private void pBExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Close();
         }
 
         private void pBExit_Paint(object sender, PaintEventArgs e)

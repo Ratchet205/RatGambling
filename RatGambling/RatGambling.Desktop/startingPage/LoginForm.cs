@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using BCrypt.Net;
 using System.Text.RegularExpressions;
+using RatGambling.Desktop.src.classes;
 
 namespace RatGambling.Desktop.startingPage
 {
@@ -171,7 +172,7 @@ namespace RatGambling.Desktop.startingPage
 
         private void pBSubmit_MouseDown(object sender, MouseEventArgs e)
         {
-            if (IsTransparentPixel(e.Location))
+            if (IsTransparentPixel.Check(buttonImage, e.Location, pBSubmit.Width, pBSubmit.Height))
             {
                 return;
             }
@@ -214,27 +215,11 @@ namespace RatGambling.Desktop.startingPage
             }
         }
 
-        private bool IsTransparentPixel(Point clickLocation)
-        {
-            float scaleX = (float)buttonImage.Width / pBSubmit.Width;
-            float scaleY = (float)buttonImage.Height / pBSubmit.Height;
-
-            int imageX = (int)(clickLocation.X * scaleX);
-            int imageY = (int)(clickLocation.Y * scaleY);
-
-            if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true;
-
-            Color pixelColor = buttonImage.GetPixel(imageX, imageY);
-
-            return pixelColor.A == 0;
-        }
-
         private void pBSubmit_MouseMove(object sender, MouseEventArgs e)
         {
             Point mousePosition = pBSubmit.PointToClient(Cursor.Position);
 
-            if (IsTransparentPixel(mousePosition))
+            if (IsTransparentPixel.Check(buttonImage, mousePosition, pBSubmit.Width, pBSubmit.Height))
             {
                 if (isRotating)
                 {
@@ -252,6 +237,7 @@ namespace RatGambling.Desktop.startingPage
                 rotationTimer.Start();
             }
         }
+
 
         private void tBEmail_Enter(object sender, EventArgs e)
         {

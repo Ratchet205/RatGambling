@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RatGambling.Desktop.src.classes;
+using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -148,28 +149,11 @@ namespace RatGambling.Desktop.startingPage
             return Regex.IsMatch(email, emailPattern);
         }
 
-
-        private bool IsTransparentPixel(Point clickLocation)
-        {
-            float scaleX = (float)buttonImage.Width / pBSubmit.Width;
-            float scaleY = (float)buttonImage.Height / pBSubmit.Height;
-
-            int imageX = (int)(clickLocation.X * scaleX);
-            int imageY = (int)(clickLocation.Y * scaleY);
-
-            if (imageX < 0 || imageX >= buttonImage.Width || imageY < 0 || imageY >= buttonImage.Height)
-                return true;
-
-            Color pixelColor = buttonImage.GetPixel(imageX, imageY);
-
-            return pixelColor.A == 0;
-        }
-
         private void pBSubmit_MouseMove(object sender, MouseEventArgs e)
         {
             Point mousePosition = pBSubmit.PointToClient(Cursor.Position);
 
-            if (IsTransparentPixel(mousePosition))
+            if (IsTransparentPixel.Check(buttonImage, mousePosition, pBSubmit.Width, pBSubmit.Height))
             {
                 if (isRotating)
                 {

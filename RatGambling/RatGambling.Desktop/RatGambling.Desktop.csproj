@@ -15,7 +15,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="src\classes\" />
 		<Folder Include="src\resources\lang\" />
 		<Folder Include="src\resources\sounds\" />
 	</ItemGroup>

@@ -17,6 +17,7 @@ namespace RatGambling.Desktop.src.customControl
             using SolidBrush brush = new(Color.FromArgb((int)(Opacity * 255), this.BackColor));
             e.Graphics.FillRectangle(brush, this.ClientRectangle);
         }
+        
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {

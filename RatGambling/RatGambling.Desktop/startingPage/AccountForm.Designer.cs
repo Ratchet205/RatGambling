@@ -1,4 +1,7 @@
-﻿namespace RatGambling.Desktop.startingPage
+﻿using RatGambling.Desktop.src.customControl;
+using System.Drawing.Drawing2D;
+
+namespace RatGambling.Desktop.startingPage
 {
     partial class AccountForm
     {
@@ -28,29 +31,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pPersInformations = new Panel();
-            pMainPanel = new src.customControl.ScrollablePanel();
+            pPersInformation = new Panel();
+            pBUserProfile = new PictureBox();
+            pMainPanel = new ScrollablePanel();
+            pPersInformation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pBUserProfile).BeginInit();
             pMainPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // pPersInformations
+            // pPersInformation
             // 
-            pPersInformations.BackColor = Color.FromArgb(44, 44, 44);
-            pPersInformations.Location = new Point(39, 30);
-            pPersInformations.Margin = new Padding(30);
-            pPersInformations.Name = "pPersInformations";
-            pPersInformations.Padding = new Padding(20);
-            pPersInformations.Size = new Size(322, 177);
-            pPersInformations.TabIndex = 0;
-            pPersInformations.Paint += pPersInformations_Paint;
+            pPersInformation.BackColor = Color.FromArgb(44, 44, 44);
+            pPersInformation.Controls.Add(pBUserProfile);
+            pPersInformation.Location = new Point(39, 30);
+            pPersInformation.Margin = new Padding(30);
+            pPersInformation.Name = "pPersInformation";
+            pPersInformation.Padding = new Padding(20);
+            pPersInformation.Size = new Size(322, 318);
+            pPersInformation.TabIndex = 0;
+            pPersInformation.Paint += pPersInformations_Paint;
+            // 
+            // pBUserProfile
+            // 
+            pBUserProfile.BackgroundImageLayout = ImageLayout.None;
+            pBUserProfile.Image = Properties.MainFormResources.standartUser;
+            pBUserProfile.Location = new Point(111, 23);
+            pBUserProfile.Name = "pBUserProfile";
+            pBUserProfile.Size = new Size(100, 100);
+            pBUserProfile.SizeMode = PictureBoxSizeMode.StretchImage;
+            pBUserProfile.TabIndex = 0;
+            pBUserProfile.TabStop = false;
+            pBUserProfile.MouseMove += pBUserProfile_MouseMove;
             // 
             // pMainPanel
             // 
             pMainPanel.AutoScroll = true;
-            pMainPanel.Controls.Add(pPersInformations);
+            pMainPanel.BackColor = Color.Transparent;
+            pMainPanel.Controls.Add(pPersInformation);
             pMainPanel.Location = new Point(0, 0);
             pMainPanel.Name = "pMainPanel";
-            pMainPanel.Size = new Size(400, 500);
+            pMainPanel.Size = new Size(400, 446);
             pMainPanel.TabIndex = 1;
             // 
             // AccountForm
@@ -66,13 +86,16 @@
             Text = "AccountForm";
             Deactivate += AccountForm_Deactivate;
             Load += AccountForm_Load;
+            pPersInformation.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pBUserProfile).EndInit();
             pMainPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel pPersInformations;
+        private Panel pPersInformation;
         private src.customControl.ScrollablePanel pMainPanel;
+        private PictureBox pBUserProfile;
     }
 }

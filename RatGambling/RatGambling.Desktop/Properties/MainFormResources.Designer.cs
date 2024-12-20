@@ -203,6 +203,16 @@ namespace RatGambling.Desktop.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap standartUserPng {
+            get {
+                object obj = ResourceManager.GetObject("standartUserPng", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap submit_button_blue {
             get {
                 object obj = ResourceManager.GetObject("submit_button_blue", resourceCulture);

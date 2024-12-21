@@ -18,6 +18,8 @@ namespace RatGambling.Desktop.startingPage
         private AccountForm parent = new();
         private bool _pBExitHover = false;
         private string imagePath;
+        private Image originalImage;
+        private float zoomFactor = 1f;
         public ChangeProfilePic(AccountForm parent, string imagePath)
         {
             InitializeComponent();
@@ -65,6 +67,16 @@ namespace RatGambling.Desktop.startingPage
 
         private void pBExit_Click(object sender, EventArgs e)
         {
+            parent?.glassPanelBackground.Dispose();
+            parent.changePW = false;
+
+            if (parent != null)
+            {
+                parent.WindowState = FormWindowState.Normal;
+                parent.BringToFront();
+                parent.Activate();
+                parent.Focus();
+            }
             Close();
         }
 
@@ -117,7 +129,7 @@ namespace RatGambling.Desktop.startingPage
             {
                 // Das Bild in die PictureBox laden
                 pBChangePfP.Image = new Bitmap(imagePath);
-                pBChangePfP.SizeMode = PictureBoxSizeMode.StretchImage; // Bild an die Größe der PictureBox anpassen
+                originalImage = pBChangePfP.Image;
             }
         }
 
@@ -137,6 +149,38 @@ namespace RatGambling.Desktop.startingPage
         private void SaveImageToDatabase()
         {
             //Do it
+        }
+
+        private void trBZoomPFP_Scroll(object sender, EventArgs e)
+        {
+            zoomFactor = trBZoomPFP.Value / 100f;
+            UpdateImageDisplay();
+        }
+        private void UpdateImageDisplay()
+        {
+            if (originalImage != null)
+            {
+                int newWidth = (int)(originalImage.Width * zoomFactor);
+                int newHeight = (int)(originalImage.Height * zoomFactor);
+                Bitmap scaledImage = new Bitmap(originalImage, newWidth, newHeight);
+
+                // Bild rund zuschneiden
+                Bitmap roundImage = new Bitmap(scaledImage.Width, scaledImage.Height);
+                using (Graphics g = Graphics.FromImage(roundImage))
+                {
+                    g.Clear(Color.Transparent);
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    using (GraphicsPath path = new GraphicsPath())
+                    {
+                        path.AddEllipse(0, 0, scaledImage.Width, scaledImage.Height);
+                        g.SetClip(path);
+                        g.DrawImage(scaledImage, 0, 0);
+                    }
+                }
+
+                // Bild in PictureBox anzeigen
+                pBChangePfP.Image = roundImage;
+            }
         }
     }
 }

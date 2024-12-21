@@ -70,6 +70,8 @@ namespace RatGambling.Desktop.startingPage
 
             pMainPanel.VerticalScroll.Visible = false;
             pMainPanel.HorizontalScroll.Visible = false;
+            dTPBirthday.MaxDate = DateTime.Now.AddYears(-18);
+            dTPBirthday.MinDate = DateTime.Now.AddYears(-200);
         }
 
 
@@ -89,6 +91,17 @@ namespace RatGambling.Desktop.startingPage
                             panel.ClientRectangle.Y,
                             panel.ClientRectangle.Width,
                             panel.ClientRectangle.Height);
+        }
+        private void DrawLabelBorder(PaintEventArgs e, Label label)
+        {
+            Graphics g = e.Graphics;
+            Color borderColor = Color.Black;
+            int borderWidth = 4;
+            g.DrawRectangle(new Pen(borderColor, borderWidth),
+                            label.ClientRectangle.X,
+                            label.ClientRectangle.Y,
+                            label.ClientRectangle.Width,
+                            label.ClientRectangle.Height);
         }
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -151,8 +164,9 @@ namespace RatGambling.Desktop.startingPage
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif";
             openFileDialog.Title = "Wählen Sie ein Profilbild aus";
+            var result = openFileDialog.ShowDialog();
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 // Bildpfad erhalten
                 string imagePath = openFileDialog.FileName;
@@ -160,6 +174,11 @@ namespace RatGambling.Desktop.startingPage
                 // Bild an ChangeProfilePic übergeben und öffnen
                 ChangeProfilePic changeProfilePic = new ChangeProfilePic(this, imagePath);
                 changeProfilePic.Show();
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                glassPanelBackground.Dispose();
+                changePW = false;
             }
         }
 
@@ -189,6 +208,195 @@ namespace RatGambling.Desktop.startingPage
         public void SetImageToOtherForm(System.Drawing.Image image)
         {
             pBUserProfile.Image = image;
+        }
+
+        private void lUsername_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pUserName_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pUsername);
+        }
+
+        private void dTPBirthday_ValueChanged(object sender, EventArgs e)
+        {
+            tBBirthday.Text = dTPBirthday.Value.ToString("dd.MM.yyyy");
+        }
+
+        private void pBSavePISettings_Click(object sender, EventArgs e)
+        {
+            if (DateTime.TryParseExact(tBBirthday.Text, "dd.MM.yyyy",
+                               System.Globalization.CultureInfo.InvariantCulture,
+                               System.Globalization.DateTimeStyles.None,
+                               out DateTime parsedDate))
+            {
+                dTPBirthday.Value = parsedDate;
+            }
+            else
+            {
+                tBBirthday.Focus();
+            }
+        }
+
+        private void tBBirthday_TextChanged(object sender, EventArgs e)
+        {
+            // Entferne alle Punkte, um die Formatierung neu anzuwenden
+            string input = tBBirthday.Text.Replace(".", "");
+
+            // Begrenze die Eingabe auf maximal 8 Zeichen
+            if (input.Length > 8)
+            {
+                input = input.Substring(0, 8);
+            }
+
+            // Füge Punkte direkt nach dem zweiten und fünften Zeichen ein
+            if (input.Length > 2)
+                input = input.Insert(2, ".");
+            if (input.Length > 5)
+                input = input.Insert(5, ".");
+
+            // Aktualisiere die TextBox ohne den Cursor zu verschieben
+            tBBirthday.Text = input;
+            tBBirthday.SelectionStart = input.Length; // Cursor ans Ende setzen
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            dTPBirthday.Focus();
+        }
+
+        private void pEmail_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pEmail);
+        }
+
+        private void pPhonenumber_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pPhonenumber);
+        }
+
+        private void pBirthday_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pBirthday);
+        }
+
+        private void lSaveChangesPI_Click(object sender, EventArgs e)
+        {
+            string errorMessage = "";
+
+            string username = tBUsername.Text;
+            string email = tBEmail.Text;
+            string phoneNumber = tBPhonenumber.Text;
+            string birthday = tBBirthday.Text;
+
+            bool hasUsernameError = string.IsNullOrEmpty(username);
+            bool hasEmailError = string.IsNullOrEmpty(email) || !IsValidEmail(email);
+            bool hasPhoneError = !string.IsNullOrEmpty(phoneNumber) && !IsValidPhoneNumber(phoneNumber);
+            bool hasBirthdayError = !string.IsNullOrEmpty(birthday) && !IsValidBirthday(birthday);
+
+            if (hasUsernameError && hasEmailError)
+            {
+                errorMessage = "Benutzername und E-Mail müssen angegeben werden.";
+            }
+            else if (hasUsernameError)
+            {
+                errorMessage = "Benutzername muss angegeben werden.";
+            }
+            else if (hasEmailError)
+            {
+                errorMessage = "E-Mail ist im falschen Format.";
+            }
+            else if (hasPhoneError)
+            {
+                errorMessage = "Telefonnummer ist im falschen Format.";
+            }
+            else if (hasBirthdayError)
+            {
+                errorMessage = "Geburtsdatum ist im falschen Format.";
+            }
+
+            lError.Text = errorMessage;
+            CenterLabelHorizontally(lError);
+            if (errorMessage == "")
+            {
+                throw new NotImplementedException(); //PersonalInformations in DB schreiben
+            }
+        }
+
+
+        private void CenterLabelHorizontally(Label label)
+        {
+            int parentWidth = label.Parent.Width;
+            int labelWidth = label.Width;
+            int newX = (parentWidth - labelWidth) / 2;
+
+            label.Location = new Point(newX, label.Location.Y);
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailRegex = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            return emailRegex.IsMatch(email);
+        }
+
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            var regex = new System.Text.RegularExpressions.Regex(@"^\+?[0-9]{1,3}?[-.\s]?[0-9]+$");
+            return regex.IsMatch(phoneNumber);
+        }
+
+        private bool IsValidBirthday(string birthday)
+        {
+            DateTime parsedDate;
+            return DateTime.TryParseExact(birthday, "dd.MM.yyyy",
+                                          System.Globalization.CultureInfo.InvariantCulture,
+                                          System.Globalization.DateTimeStyles.None,
+                                          out parsedDate);
+        }
+
+
+
+
+        private void lSaveChangesPI_Paint(object sender, PaintEventArgs e)
+        {
+            DrawLabelBorder(e, lSaveChangesPI);
+        }
+
+        private void pSecurity_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pSecurity);
+        }
+
+        private void pChangePassword_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pChangePassword);
+        }
+
+        private void p2FA_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, p2FA);
+        }
+
+        private void lSaveChangesS_Paint(object sender, PaintEventArgs e)
+        {
+            DrawLabelBorder(e, lSaveChangesS);
+        }
+
+        private void lSaveChangesS_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pOther_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pOther);
+        }
+
+        private void pCommunication_Paint(object sender, PaintEventArgs e)
+        {
+            DrawPanelBorder(e, pCommunication);
         }
     }
 }

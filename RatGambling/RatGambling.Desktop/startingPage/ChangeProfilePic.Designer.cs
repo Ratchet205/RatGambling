@@ -32,9 +32,11 @@
             pBExit = new PictureBox();
             pBChangePfP = new PictureBox();
             bFinishEdit = new Button();
+            trBZoomPFP = new TrackBar();
             pTopBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pBExit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pBChangePfP).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trBZoomPFP).BeginInit();
             SuspendLayout();
             // 
             // pTopBorder
@@ -65,7 +67,6 @@
             pBChangePfP.Location = new Point(39, 83);
             pBChangePfP.Name = "pBChangePfP";
             pBChangePfP.Size = new Size(100, 100);
-            pBChangePfP.SizeMode = PictureBoxSizeMode.StretchImage;
             pBChangePfP.TabIndex = 3;
             pBChangePfP.TabStop = false;
             // 
@@ -79,12 +80,21 @@
             bFinishEdit.UseVisualStyleBackColor = true;
             bFinishEdit.Click += bFinishEdit_Click;
             // 
+            // trBZoomPFP
+            // 
+            trBZoomPFP.Location = new Point(39, 189);
+            trBZoomPFP.Name = "trBZoomPFP";
+            trBZoomPFP.Size = new Size(100, 45);
+            trBZoomPFP.TabIndex = 5;
+            trBZoomPFP.Scroll += trBZoomPFP_Scroll;
+            // 
             // ChangeProfilePic
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(54, 54, 54);
             ClientSize = new Size(384, 261);
+            Controls.Add(trBZoomPFP);
             Controls.Add(bFinishEdit);
             Controls.Add(pBChangePfP);
             Controls.Add(pTopBorder);
@@ -97,7 +107,9 @@
             pTopBorder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pBExit).EndInit();
             ((System.ComponentModel.ISupportInitialize)pBChangePfP).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trBZoomPFP).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -106,5 +118,6 @@
         private PictureBox pBExit;
         private PictureBox pBChangePfP;
         private Button bFinishEdit;
+        private TrackBar trBZoomPFP;
     }
 }

@@ -16,9 +16,24 @@ namespace RatGambling.Desktop.src
         private bool _pBExitHover = false;
         private bool _pBMinHover = false;
         private (int X, int Y) _mouseposition;
+
+        private (int X, int Y) _canvas;
+        public (int X, int Y) Canvas => _canvas;
         public StdForm()
         {
             InitializeComponent();
+        }
+
+        public StdForm(int X, int Y)
+        {
+            InitializeComponent();
+            Width = X;
+            Height = Y;
+        }
+
+        private (int X, int Y) SetCanvas()
+        {
+            return(Width, Height - pTopBorder.Height)
         }
 
         private void pBExit_Click(object sender, EventArgs e)
